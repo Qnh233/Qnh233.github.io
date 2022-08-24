@@ -1,0 +1,56 @@
+<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>/*!*--------------------------------------------------------------------------------------*!*/
+/*!* 背景顶图透明，公用一张图样式 *!*/
+/*!* 顶图透明 *!*/
+/*#page-header{*/
+/*    background: transparent!important;*/
+/*}*/
+/*!* top-img黑色透明玻璃效果移除，我自己是没有加的，毕竟在文章详情页面，这样会更有区分度一点 *!*/
+/*!**/
+/*#page-header.post-bg:before {*/
+/*  background-color: transparent!important;*/
+/*}*/
+/**!*/
+
+/*!* 夜间模式伪类遮罩层透明 *!*/
+/*[data-theme="dark"]*/
+/*#footer::before{*/
+/*    background: transparent!important;*/
+/*}*/
+/*[data-theme="dark"]*/
+/*#page-header::before{*/
+/*    background: transparent!important;*/
+/*}*/
+/*!*--------------------------------------------------------------------------------------*!*/
+/*!* 页脚样式 *!*/
+/*#footer {*/
+/*    background: transparent !important;   !* 页脚设置为透明 *!*/
+/*}*/
+/*!* 页脚字体颜色 *!*/
+/*#footer-wrap {*/
+/*    position: relative;*/
+/*    color: #3f3f3f;                     !* 页脚字体颜色设置为灰色 *!*/
+/*    text-align: center;*/
+/*    padding: 2rem 1rem;*/
+/*}*/
+
+/* 滚动条 */
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #e58a8a;
+    background-image: -webkit-linear-gradient( 45deg, rgba(255, 255, 255, 0.4) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0.4) 75%, transparent 75%, transparent);
+    border-radius: 2em;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+::-moz-selection {
+    color: #fff;
+    background-color: #e58a8a;
+}
