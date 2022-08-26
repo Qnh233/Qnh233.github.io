@@ -1,37 +1,48 @@
-/*!*--------------------------------------------------------------------------------------*!*/
-/*!* 背景顶图透明，公用一张图样式 *!*/
-/*!* 顶图透明 *!*/
-/*#page-header{*/
-/*    background: transparent!important;*/
-/*}*/
-/*!* top-img黑色透明玻璃效果移除，我自己是没有加的，毕竟在文章详情页面，这样会更有区分度一点 *!*/
-/*!**/
+/*--------------------------------------------------------------------------------------*/
+/* 背景顶图透明，公用一张图样式 */
+/* 顶(头)图透明 */
+#page-header{
+    background: transparent!important;
+}
+/* top-img黑色透明玻璃效果移除，我自己是没有加的，毕竟在文章详情页面，这样会更有区分度一点 */
 /*#page-header.post-bg:before {*/
 /*  background-color: transparent!important;*/
 /*}*/
-/**!*/
 
-/*!* 夜间模式伪类遮罩层透明 *!*/
-/*[data-theme="dark"]*/
-/*#footer::before{*/
-/*    background: transparent!important;*/
-/*}*/
-/*[data-theme="dark"]*/
-/*#page-header::before{*/
-/*    background: transparent!important;*/
-/*}*/
-/*!*--------------------------------------------------------------------------------------*!*/
-/*!* 页脚样式 *!*/
-/*#footer {*/
-/*    background: transparent !important;   !* 页脚设置为透明 *!*/
-/*}*/
-/*!* 页脚字体颜色 *!*/
-/*#footer-wrap {*/
-/*    position: relative;*/
-/*    color: #3f3f3f;                     !* 页脚字体颜色设置为灰色 *!*/
-/*    text-align: center;*/
-/*    padding: 2rem 1rem;*/
-/*}*/
+/*top-img黑色透明玻璃效果移除，不建议加，除非你执着于完全一图流或者背景图对比色明显 */
+#page-header.post-bg:before {
+    background-color: transparent!important;
+}
+
+#page-header::before{
+    background: transparent!important;
+}
+/* 页脚透明 */
+#footer::before{
+    background: transparent!important;
+}
+
+/* 夜间模式伪类遮罩层透明 */
+[data-theme="dark"]
+#footer::before{
+    background: transparent!important;
+}
+[data-theme="dark"]
+#page-header::before{
+    background: transparent!important;
+}
+/*--------------------------------------------------------------------------------------*/
+/* 页脚样式 */
+#footer {
+    background: transparent !important;   /* 页脚设置为透明 */
+}
+/* 页脚字体颜色 */
+#footer-wrap {
+    position: relative;
+    color: #fd008f;                     /* 页脚字体颜色设置为x色 */
+    text-align: center;
+    padding: 2rem 1rem;
+}
 
 /* 滚动条 */
 
