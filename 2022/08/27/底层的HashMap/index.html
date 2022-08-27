@@ -1,0 +1,310 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>HashMap的源码浅解 | 必燃空间</title><meta name="keywords" content="必燃,博客"><meta name="author" content="必燃."><meta name="copyright" content="必燃."><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="底层源码HashMap可以看到Set集合以及Map集合，其底层都是使用了HashMap。数组+链表+红黑树 区别是Set的Value值是设定好的一个默认值，而Map中Value是可以设定的。 相同点  使用几乎相同的源代码 扩容机制相同 Hash的求值都是利用Key变量 排除特定的子类，元素都是无序且不可重复的（LinkedHashSet是有序的）  区别    Set Map    Value为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HashMap的源码浅解">
+<meta property="og:url" content="https://qnh233.github.io/2022/08/27/%E5%BA%95%E5%B1%82%E7%9A%84HashMap/index.html">
+<meta property="og:site_name" content="必燃空间">
+<meta property="og:description" content="底层源码HashMap可以看到Set集合以及Map集合，其底层都是使用了HashMap。数组+链表+红黑树 区别是Set的Value值是设定好的一个默认值，而Map中Value是可以设定的。 相同点  使用几乎相同的源代码 扩容机制相同 Hash的求值都是利用Key变量 排除特定的子类，元素都是无序且不可重复的（LinkedHashSet是有序的）  区别    Set Map    Value为">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img2.wallspic.com/previews/2/9/0/9/6/169092/169092-cang_xiao-zu_zhi_mao_tou_ying-niao-yu_mao-yi-x750.jpg">
+<meta property="article:published_time" content="2022-08-27T00:48:45.987Z">
+<meta property="article:modified_time" content="2022-08-27T00:56:02.822Z">
+<meta property="article:author" content="必燃.">
+<meta property="article:tag" content="必燃,博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img2.wallspic.com/previews/2/9/0/9/6/169092/169092-cang_xiao-zu_zhi_mao_tou_ying-niao-yu_mao-yi-x750.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://qnh233.github.io/2022/08/27/%E5%BA%95%E5%B1%82%E7%9A%84HashMap/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'HashMap的源码浅解',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-08-27 08:56:02'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/mycss/mine.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/./img/%E5%A4%B4%E5%83%8FNaruto.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Post</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签集合</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/photo/"><i class="fa-fw fa-solid fa-image"></i><span> Photo</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img2.wallspic.com/previews/2/9/0/9/6/169092/169092-cang_xiao-zu_zhi_mao_tou_ying-niao-yu_mao-yi-x750.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">必燃空间</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Post</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签集合</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/photo/"><i class="fa-fw fa-solid fa-image"></i><span> Photo</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">HashMap的源码浅解</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-27T00:48:45.987Z" title="发表于 2022-08-27 08:48:45">2022-08-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-27T00:56:02.822Z" title="更新于 2022-08-27 08:56:02">2022-08-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%BA%90%E7%A0%81/">源码</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="HashMap的源码浅解"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="底层源码HashMap"><a href="#底层源码HashMap" class="headerlink" title="底层源码HashMap"></a>底层源码HashMap</h1><p>可以看到Set集合以及Map集合，其底层都是使用了HashMap。<strong>数组+链表+红黑树</strong></p>
+<p>区别是Set的Value值是设定好的一个默认值，而Map中Value是可以设定的。</p>
+<p>相同点</p>
+<ol>
+<li>使用几乎相同的源代码</li>
+<li>扩容机制相同</li>
+<li>Hash的求值都是利用Key变量</li>
+<li>排除特定的子类，元素都是无序且不可重复的（LinkedHashSet是有序的）</li>
+</ol>
+<p>区别</p>
+<table>
+<thead>
+<tr>
+<th>Set</th>
+<th>Map</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Value为默认常量值</td>
+<td>Value可以更改</td>
+</tr>
+<tr>
+<td>无K-V</td>
+<td>有K-V</td>
+</tr>
+<tr>
+<td>Set的Key就是值</td>
+<td>具有KeySet，Values，EntrySet方法</td>
+</tr>
+</tbody></table>
+<br/>
+
+<p>源代码解析</p>
+<p>下方全使用add或者put为入口进入</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">add</span><span class="params">(E e)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> map.put(e, PRESENT)==<span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//此入口表示Set的add会调用Map中的put方法，且传入一个PRESENT参数，  等于说Set就是把Value填充好的Map</span></span><br><span class="line">    <span class="comment">//然后来到</span></span><br><span class="line">    <span class="keyword">public</span> V <span class="title function_">put</span><span class="params">(K key, V value)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> putVal(hash(key), key, value, <span class="literal">false</span>, <span class="literal">true</span>);</span><br><span class="line">        <span class="comment">//五个参数，分别为hash值，key，value,onlyIfAbsent,evict</span></span><br><span class="line">        分别代表此添加的Node的hash值，key值，value值，以及是否仅在空时</span><br><span class="line">        ，还有evict</span><br><span class="line">        首先hash值进入到</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="title function_">hash</span><span class="params">(Object key)</span> &#123;</span><br><span class="line">        <span class="type">int</span> h;</span><br><span class="line">        <span class="keyword">return</span> (key == <span class="literal">null</span>) ? <span class="number">0</span> : (h = key.hashCode()) ^ (h &gt;&gt;&gt; <span class="number">16</span>);</span><br><span class="line">        检查是否key==<span class="literal">null</span>，如果不是，返回一个利用hashCode方法得到值</span><br><span class="line">        进行相关运算得到一个hash值。那么起到hash值的决定性作用的是</span><br><span class="line">        此key类型中hashCode得到的值。所以，如果想让所有此类型的对象的</span><br><span class="line">        hash完全一致，或者为特定值，那么只需要修改hashCode方法返回</span><br><span class="line">        一个固定值即可。<span class="comment">//若修改hashCode方法，请一同修改equal方法，</span></span><br><span class="line">        <span class="comment">//一般来讲，两个对象相同的前提是hash相同，hash可以看作是地址的映射。</span></span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    追溯putVal方法，将是一场恶战</span><br><span class="line">     <span class="keyword">final</span> V <span class="title function_">putVal</span><span class="params">(<span class="type">int</span> hash, K key, V value, <span class="type">boolean</span> onlyIfAbsent,</span></span><br><span class="line"><span class="params">                   <span class="type">boolean</span> evict)</span> &#123;</span><br><span class="line">        Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; <span class="type">int</span> n, i;<span class="comment">//初始化变量，这些都是临时变量。</span></span><br><span class="line">        <span class="keyword">if</span> ((tab = table) == <span class="literal">null</span> || (n = tab.length) == <span class="number">0</span>)<span class="comment">//判断此集合是否为空，或者长度为0 此处判断语句完成tab与n的赋值</span></span><br><span class="line">            n = (tab = resize()).length;<span class="comment">//若是，则进行扩容 resize（） 扩容返回一个新的tab （Node&lt;K,V&gt;）</span></span><br><span class="line">        <span class="keyword">if</span> ((p = tab[i = (n - <span class="number">1</span>) &amp; hash]) == <span class="literal">null</span>)<span class="comment">//若此集合存在元素，则使用此传入的hash计算出一个索引（下标）</span></span><br><span class="line">            <span class="comment">//并判断此处是否为空。 tab可以说是一个桶，此处是寻找适合此数据的桶，并判断桶是否为空 此处完成p的赋值</span></span><br><span class="line">            tab[i] = newNode(hash, key, value, <span class="literal">null</span>);<span class="comment">//若为空，则直接添加。</span></span><br><span class="line">        <span class="keyword">else</span> &#123;<span class="comment">//若桶中有元素，则需要进行以下操作进行判断是否重复，这是此集合的特点。</span></span><br><span class="line">            Node&lt;K,V&gt; e; K k;<span class="comment">//成员变量</span></span><br><span class="line">            <span class="keyword">if</span> (p.hash == hash &amp;&amp;<span class="comment">//此处的p指向桶中的第一个元素。判断传入元素的hash与此处的hash是否一致。（一般情况都一致）</span></span><br><span class="line">            <span class="comment">//因为hash代表着索引，代表着你来到哪个桶，已经来到了这个桶，你与桶中物比较，hash肯定相同。</span></span><br><span class="line">                ((k = p.key) == key || (key != <span class="literal">null</span> &amp;&amp; key.equals(k))))<span class="comment">//hash判断用的是&amp;&amp;所以若不该在一个桶，将代表不能放入</span></span><br><span class="line">                <span class="comment">//上行语句 判断此处的key与传入元素的key是否为同一对象（判断地址），若为同一对象，为真代表不能放入</span></span><br><span class="line">                <span class="comment">//后半语句，判断此处传入元素key是否为空并且key是否与此处key值相同（此处判断值相同使用equals比较，可以重写）</span></span><br><span class="line">                <span class="comment">//若不为空且按照重写方法来讲两对象相同，那么整体为真。代表不能放入</span></span><br><span class="line">                <span class="comment">//整体语句为真，不能放入。若hash不同，直接代表不能放入。若hash相同，会有两种情况，两元素相同，或者不同。</span></span><br><span class="line">                <span class="comment">//那么就需要用到==或者equals进行判断是否不同。这也从侧面说明了重写equal为什么也要重写hashcode的原因。</span></span><br><span class="line">                <span class="comment">//若我想用name来代表两对象是否相同，所以重写equal来返回name是否相同即可。若此时没有重写hashcode</span></span><br><span class="line">                <span class="comment">//hashcode返回的值并没有与name产生关联，所以两个相同name的对象，产生的hash并不相同。在此处直接一票否决。</span></span><br><span class="line">                <span class="comment">//object的hashcode源码是native 即从C语言中获取的方法。</span></span><br><span class="line">                e = p;<span class="comment">//若两者相同，代表不能放入，用e接收p。</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (p <span class="keyword">instanceof</span> TreeNode)<span class="comment">//此处是判断此处链表是否为红黑树，若是红黑树则利用红黑树的添加方法。</span></span><br><span class="line">                e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(<span class="built_in">this</span>, tab, hash, key, value);</span><br><span class="line">            <span class="keyword">else</span> &#123;<span class="comment">//若两者不相同且也不是红黑树，则执行下方与链表内其他元素进行比较</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">binCount</span> <span class="operator">=</span> <span class="number">0</span>; ; ++binCount) &#123;<span class="comment">//死循环</span></span><br><span class="line">                    <span class="keyword">if</span> ((e = p.next) == <span class="literal">null</span>) &#123;<span class="comment">//逐个遍历链表中的元素，若到头 则直接添加元素</span></span><br><span class="line">                        p.next = newNode(hash, key, value, <span class="literal">null</span>);</span><br><span class="line">                        <span class="keyword">if</span> (binCount &gt;= TREEIFY_THRESHOLD - <span class="number">1</span>) <span class="comment">// -1 for 1st //添加完毕后若链表长度大于8，进入红黑树判断</span></span><br><span class="line">                            treeifyBin(tab, hash);<span class="comment">//红黑树转换方法，其中会先判断是否满足转换条件，是则转换，否则扩容。</span></span><br><span class="line">                        <span class="keyword">break</span>;<span class="comment">//添加完毕，退出循环。</span></span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (e.hash == hash &amp;&amp;</span><br><span class="line">                        ((k = e.key) == key || (key != <span class="literal">null</span> &amp;&amp; key.equals(k))))<span class="comment">//元素不为空，再判断是否相同，相同则退出循环</span></span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    p = e;<span class="comment">//此处是便于便利的语句，上述第一次e=p.next后，e为桶中第二的元素，为使得便利继续，就使p变为第二的元素e</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (e != <span class="literal">null</span>) &#123; <span class="comment">// existing mapping for key  上述判断若两者相同 会使e接收到一个p的对象。即不为空</span></span><br><span class="line">            <span class="comment">//所以此块都是相同时的操作。此块的操作更多的是契合Map，因为Map中的Value是自己传入的，会不同。</span></span><br><span class="line">            <span class="comment">//如果Key相同，会覆盖Value。 而在Set中，Value为一个常量，此块对它无影响。只是会返回一个老数据。</span></span><br><span class="line">                <span class="type">V</span> <span class="variable">oldValue</span> <span class="operator">=</span> e.value; <span class="comment">//创建临时变量接受value</span></span><br><span class="line">                <span class="keyword">if</span> (!onlyIfAbsent || oldValue == <span class="literal">null</span>)<span class="comment">//判断value是否为空并利用onlyIfAbsent</span></span><br><span class="line">                    e.value = value;<span class="comment">//此处 将Value值覆盖。</span></span><br><span class="line">                afterNodeAccess(e);<span class="comment">// todo 搞清楚这个</span></span><br><span class="line">                <span class="keyword">return</span> oldValue;<span class="comment">//将老数据返回，</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ++modCount;<span class="comment">//若上方无事发生，没有返回任何数据，说明此对象已经放入，此处+1</span></span><br><span class="line">        <span class="keyword">if</span> (++size &gt; threshold)<span class="comment">//若size+1后 即在此次添加后超过当前的阈值，就会进行扩容。</span></span><br><span class="line">            resize();</span><br><span class="line">        afterNodeInsertion(evict);<span class="comment">// todo</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;<span class="comment">//返回空值，证明无事发生。无事发生就是好事。</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<p>   TreeMap常根据key值来进行排序的，但是有时我们需要根据TreeMap的value来进行排序。对value排序我们就需要 借助于Collections的sort(List<T> list, Comparator&lt;? super T&gt; c)方法，该方法根据指定比较器产生的顺序对指定列表进行排序。但是有一个前提条件，那就是所有的元素都必须能够根据所提供的比较器来进行比较。如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TreeMapTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Map&lt;String, String&gt; map = <span class="keyword">new</span> <span class="title class_">TreeMap</span>&lt;String, String&gt;();</span><br><span class="line">        map.put(<span class="string">&quot;d&quot;</span>, <span class="string">&quot;ddddd&quot;</span>);</span><br><span class="line">        map.put(<span class="string">&quot;b&quot;</span>, <span class="string">&quot;bbbbb&quot;</span>);</span><br><span class="line">        map.put(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;aaaaa&quot;</span>);</span><br><span class="line">        map.put(<span class="string">&quot;c&quot;</span>, <span class="string">&quot;ccccc&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//这里将map.entrySet()转换成list</span></span><br><span class="line">        List&lt;Map.Entry&lt;String,String&gt;&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Map.Entry&lt;String,String&gt;&gt;(map.entrySet());</span><br><span class="line">        <span class="comment">//然后通过比较器来实现排序</span></span><br><span class="line">        Collections.sort(list,<span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;Map.Entry&lt;String,String&gt;&gt;() &#123;</span><br><span class="line">            <span class="comment">//升序排序</span></span><br><span class="line">            <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(Entry&lt;String, String&gt; o1,</span></span><br><span class="line"><span class="params">                    Entry&lt;String, String&gt; o2)</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> o1.getValue().compareTo(o2.getValue());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">for</span>(Map.Entry&lt;String,String&gt; mapping:list)&#123;                System.out.println(mapping.getKey()+<span class="string">&quot;:&quot;</span>+mapping.getValue()); </span><br><span class="line">          &#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们都是HashMap的值是没有顺序的，他是按照key的HashCode来实现的。对于这个无序的HashMap我们要怎么来实现排序呢？参照TreeMap的value排序，我们一样的也可以实现HashMap的排序。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HashMapTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Map&lt;String, String&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, String&gt;();</span><br><span class="line">        map.put(<span class="string">&quot;c&quot;</span>, <span class="string">&quot;ccccc&quot;</span>);</span><br><span class="line">        map.put(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;aaaaa&quot;</span>);</span><br><span class="line">        map.put(<span class="string">&quot;b&quot;</span>, <span class="string">&quot;bbbbb&quot;</span>);</span><br><span class="line">        map.put(<span class="string">&quot;d&quot;</span>, <span class="string">&quot;ddddd&quot;</span>);</span><br><span class="line"></span><br><span class="line">        List&lt;Map.Entry&lt;String,String&gt;&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Map.Entry&lt;String,String&gt;&gt;(map.entrySet());</span><br><span class="line">        Collections.sort(list,<span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;Map.Entry&lt;String,String&gt;&gt;() &#123;</span><br><span class="line">            <span class="comment">//升序排序</span></span><br><span class="line">            <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(Entry&lt;String, String&gt; o1,</span></span><br><span class="line"><span class="params">                    Entry&lt;String, String&gt; o2)</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> o1.getValue().compareTo(o2.getValue());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(Map.Entry&lt;String,String&gt; mapping:list)&#123; </span><br><span class="line">               System.out.println(mapping.getKey()+<span class="string">&quot;:&quot;</span>+mapping.getValue()); </span><br><span class="line">          &#125; </span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://Qnh233.github.io">必燃.</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://qnh233.github.io/2022/08/27/%E5%BA%95%E5%B1%82%E7%9A%84HashMap/">https://qnh233.github.io/2022/08/27/%E5%BA%95%E5%B1%82%E7%9A%84HashMap/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://Qnh233.github.io" target="_blank">必燃空间</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://img2.wallspic.com/previews/2/9/0/9/6/169092/169092-cang_xiao-zu_zhi_mao_tou_ying-niao-yu_mao-yi-x750.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/08/25/GitTeach/"><img class="next-cover" src="/photo/seen/Black_Widow.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">GitTeach</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="lv-container" data-id="city" data-uid="MTAyMC81NzEzNC8zMzU5OA=="></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/./img/%E5%A4%B4%E5%83%8FNaruto.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">必燃.</div><div class="author-info__description">去找些乐子吧</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Qnh233"><i class="fab fa-github"></i><span>调戏我！</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Qnh233" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:qiongnianhao@163.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://www.youtube.com/channel/UChSC7M_552RWSSMZbYVmgVw" target="_blank" title="Youtube"><i class="fa-brands fa-youtube"></i></a><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=1604535423&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fa-brands fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">你的出现定是人生中的礼物！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%95%E5%B1%82%E6%BA%90%E7%A0%81HashMap"><span class="toc-text">底层源码HashMap</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/08/27/%E5%BA%95%E5%B1%82%E7%9A%84HashMap/" title="HashMap的源码浅解"><img src="https://img2.wallspic.com/previews/2/9/0/9/6/169092/169092-cang_xiao-zu_zhi_mao_tou_ying-niao-yu_mao-yi-x750.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="HashMap的源码浅解"/></a><div class="content"><a class="title" href="/2022/08/27/%E5%BA%95%E5%B1%82%E7%9A%84HashMap/" title="HashMap的源码浅解">HashMap的源码浅解</a><time datetime="2022-08-27T00:48:45.987Z" title="发表于 2022-08-27 08:48:45">2022-08-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/25/GitTeach/" title="GitTeach"><img src="/photo/seen/Black_Widow.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="GitTeach"/></a><div class="content"><a class="title" href="/2022/08/25/GitTeach/" title="GitTeach">GitTeach</a><time datetime="2022-08-25T02:43:13.309Z" title="发表于 2022-08-25 10:43:13">2022-08-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/25/equals%E4%B8%8Ehashcode/" title="Equals与Hashcode"><img src="https://picsum.photos/id/63/200/200" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Equals与Hashcode"/></a><div class="content"><a class="title" href="/2022/08/25/equals%E4%B8%8Ehashcode/" title="Equals与Hashcode">Equals与Hashcode</a><time datetime="2022-08-25T02:00:00.000Z" title="发表于 2022-08-25 10:00:00">2022-08-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/23/hello-world/" title="Hello World"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2022/08/23/hello-world/" title="Hello World">Hello World</a><time datetime="2022-08-23T14:16:37.912Z" title="发表于 2022-08-23 22:16:37">2022-08-23</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent"><div id="footer-wrap"><div class="copyright">&copy;2022 By 必燃.</div><div class="footer_custom_text">星火😁</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadLivere () {
+  if (typeof LivereTower === 'object') {
+    window.LivereTower.init()
+  }
+  else {
+    (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  }
+}
+
+if ('Livere' === 'Livere' || !true) {
+  if (true) btf.loadComment(document.getElementById('lv-container'), loadLivere)
+  else loadLivere()
+}
+else {
+  function loadOtherComment () {
+    loadLivere()
+  }
+}</script></div><div class="aplayer no-destroy" data-id="3136952023" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="true"> </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
