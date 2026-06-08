@@ -8,7 +8,7 @@
 
 # Basic Site Settings
 locale                   : "zh-CN"
-site_theme               : "air" # options: "default", "air", "air", "mint", "dirt", "contrast"
+site_theme               : "mint" # options: "default", "air", "air", "mint", "dirt", "contrast"
 title                    : "必燃空间"
 title_separator          : "-"
 name                     : &name "Keqiang Xu"
