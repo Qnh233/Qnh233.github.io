@@ -7,8 +7,8 @@
 # server process.
 
 # Basic Site Settings
-locale                   : "zh-CN"
-site_theme               : "sunrise" # The available themes options are "default", "air", "sunrise", "mint", "dirt" and "contrast"
+locale                   : "en-US"
+site_theme               : "default" # The available themes options are "default", "air", "sunrise", "mint", "dirt" and "contrast"
 title                    : "必燃空间"
 title_separator          : "-"
 name                     : &name "Keqiang Xu"
@@ -28,7 +28,7 @@ author:
   pronouns         : # example: "she/her"  
   bio              : "码头搞薯条"
   location         : "China"
-  employer         : "sicau"
+  employer         : "Red Brick University"
   uri              : # URL
   email            : "haoxu1127@gmail.com"
 
@@ -80,8 +80,7 @@ author:
   wikipedia        : # Username
   xing             : # Username
   youtube          : # Username
-  zhihu            : "https://www.zhihu.com/people/xu-hao-30-77"
-  bilibili         : "https://space.bilibili.com/15993951?spm_id_from=333.1007.0.0"
+  zhihu            : # Username
 
 # Publication Category - The following the list of publication categories and their headings
 publication_category:
@@ -100,7 +99,7 @@ future                   : true
 read_more                : "disabled" # if enabled, adds "Read more" links to excerpts
 talkmap_link             : false      #change to true to add link to talkmap on talks page
 comments:
-  provider               : "giscus"
+  provider               : # false (default), "disqus", "discourse", "facebook", "google-plus", "staticman", "custom"
   disqus:
     shortname            :
   discourse:
@@ -246,8 +245,7 @@ defaults:
       layout: single
       author_profile: true
       read_time: true
-      comments:
-  provider               : "giscus" true
+      comments: true
       share: true
       related: true
   # _pages
@@ -265,8 +263,7 @@ defaults:
       layout: single
       author_profile: true
       share: true
-      comments:
-  provider               : "giscus" true
+      comments: true
   # _publications
   - scope:
       path: ""
@@ -275,8 +272,7 @@ defaults:
       layout: single
       author_profile: true
       share: true
-      comments:
-  provider               : "giscus" true
+      comments: true
   # _portfolio
   - scope:
       path: ""
