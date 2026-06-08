@@ -1,33 +1,38 @@
-# The following is the order of the links in the header of the website.
-#
-# Changing the order here will adjust the order and you can also add additional
-# links. Removing a link prevents it from showing in the header, but does not
-# prevent it from being included in the site.
-#
-# NOTE that only one of the CV options should be selected, the first is for the
-#      Markdown formatted page while the second is generated using JSON.
+# 导航栏 — 由飞书配置页自动生成
 
 main:
-  - title: "Publications"
-    url: /publications/
+  - title: "🏠 首页"
+    url: /
 
-  - title: "Talks"
-    url: /talks/    
+  - title: "Agent"
+    url: /tags/#agent
 
-  - title: "Teaching"
-    url: /teaching/    
-    
-  - title: "Portfolio"
-    url: /portfolio/
-        
-  - title: "Blog Posts"
-    url: /year-archive/
-    
+  - title: "LLM"
+    url: /tags/#llm
+
   - title: "CV"
-    url: /cv/
-    
-  # - title: "CV"
-  #   url: /cv-json/
-    
-  - title: "Guide"
-    url: /markdown/
+    url: /tags/#cv
+
+  - title: "项目"
+    url: /tags/#项目
+
+  - title: "学习笔记"
+    url: /tags/#学习笔记
+
+  - title: "复盘"
+    url: /tags/#复盘
+
+  - title: "评估"
+    url: /tags/#评估
+
+  - title: "架构"
+    url: /tags/#架构
+
+  - title: "📝 日志"
+    url: /categories/#日志
+
+  - title: "🏷️ 标签"
+    url: /tags/
+
+  - title: "📂 归档"
+    url: /year-archive/
