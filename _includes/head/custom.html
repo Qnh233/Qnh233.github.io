@@ -5,7 +5,7 @@
 <!-- Support for Academicons -->
 <link rel="stylesheet" href="{{ base_path }}/assets/css/academicons.css"/>
 
-<!-- favicon from https://commons.wikimedia.org/wiki/File:OOjs_UI_icon_academic-progressive.svg -->
+<!-- favicon -->
 <link rel="apple-touch-icon" sizes="180x180" href="{{ base_path }}/images/apple-touch-icon-180x180.png"/>
 <link rel="icon" type="image/svg+xml" href="{{ base_path }}/images/favicon.svg"/>
 <link rel="icon" type="image/png" href="{{ base_path }}/images/favicon-32x32.png" sizes="32x32"/>
@@ -16,5 +16,17 @@
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 <!-- giscus 评论 -->
+
+<!-- TOC right sidebar styles -->
+<link rel="stylesheet" href="{{ base_path }}/assets/css/toc.css">
+
+{% if page.toc_sticky %}
+<style>
+.sidebar__right.sticky {
+  position: sticky;
+  top: 80px;
+}
+</style>
+{% endif %}
 
 <!-- end custom head snippets -->

@@ -3,3 +3,35 @@
 {% include analytics.html %}
 
 {% include comments-providers/scripts.html %}
+
+{% if page.toc %}
+<script>
+(function() {
+  var c = document.getElementById('toc-menu');
+  if (!c) return;
+  var s = document.querySelector('.page__content');
+  if (!s) return;
+  var h = s.querySelectorAll('h2, h3');
+  if (!h.length) { c.parentElement.parentElement.style.display = 'none'; return; }
+
+  var html = '', stack = [];
+  h.forEach(function(e) {
+    var lv = parseInt(e.tagName.charAt(1)) - 1;
+    var id = e.getAttribute('id');
+    if (!id) {
+      id = e.textContent.trim().toLowerCase().replace(/[^\w\u4e00-\u9fff\s-]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'');
+      e.setAttribute('id', id);
+    }
+    while (stack.length >= lv) { html += '</li></ul>'; stack.pop(); }
+    if (stack.length < lv) {
+      while (stack.length < lv-1) { html += '<ul><li>'; stack.push(0); }
+      html += '<ul><li>';
+      stack.push(lv);
+    } else { html += '</li><li>'; }
+    html += '<a href="#' + id + '">' + e.textContent.trim() + '</a>';
+  });
+  while (stack.length) { html += '</li></ul>'; stack.pop(); }
+  c.innerHTML = html;
+})();
+</script>
+{% endif %}
