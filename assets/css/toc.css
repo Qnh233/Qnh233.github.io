@@ -1,21 +1,33 @@
-/* TOC right sidebar */
-#main {
-  position: relative;
-  overflow: visible;
-}
+/* TOC right sidebar — fixed position, like left sidebar */
 #main > .sidebar__right {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 190px;
-  max-height: calc(100vh - 120px);
-  overflow-y: auto;
-  font-size: 13px;
-  z-index: 5;
+  display: none;
 }
-/* Make room for TOC by reducing page width */
-#main > .sidebar__right ~ .page {
-  padding-right: 210px;
+@media screen and (min-width: 1100px) {
+  #main > .sidebar__right {
+    display: block;
+    position: fixed;
+    top: 0;
+    padding-top: 66px;
+    right: 20px;
+    width: 180px;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 5;
+    font-size: 13px;
+  }
+  /* Reduce page width to make room */
+  #main > .sidebar__right ~ .page {
+    padding-right: 210px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  #main > .sidebar__right {
+    right: calc((100vw - 1280px) / 2 + 20px);
+    width: 200px;
+  }
+  #main > .sidebar__right ~ .page {
+    padding-right: 230px;
+  }
 }
 #main > .sidebar__right .toc {
   background: #f8f9fa;
@@ -28,6 +40,8 @@
   font-size: 14px;
   margin: 0 0 8px 0;
   padding: 0;
+  border-bottom: 0;
+  background: transparent;
 }
 #main > .sidebar__right .toc__menu {
   list-style: none;
@@ -40,7 +54,7 @@
   color: #555;
   text-decoration: none;
   font-size: 12px;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 #main > .sidebar__right .toc__menu a:hover {
   color: #2f7f93;
@@ -54,20 +68,4 @@
 #main > .sidebar__right .toc__menu > li > a {
   font-weight: 600;
   color: #333;
-}
-@media (min-width: 1280px) {
-  #main > .sidebar__right {
-    width: 210px;
-  }
-  #main > .sidebar__right ~ .page {
-    padding-right: 230px;
-  }
-}
-@media (max-width: 1100px) {
-  #main > .sidebar__right {
-    display: none;
-  }
-  #main > .sidebar__right ~ .page {
-    padding-right: 0;
-  }
 }
