@@ -18,7 +18,11 @@ Hi，我是 **Keqiang Xu** 👋
 
 ### 📝 最新文章
 
-欢迎查看我的 [博客归档](/year-archive/) 和 [标签分类](/tags/)。
+{% for post in site.posts limit:3 %}
+- **{{ post.date | date: '%m-%d' }}** [{{ post.title }}]({{ post.url }}){% if post.tags %} — `{{ post.tags | join: '` `' }}`{% endif %}
+{% endfor %}
+
+[📂 全部文章](/year-archive/) · [🏷️ 标签分类](/tags/)
 
 ### 🔬 研究兴趣
 
