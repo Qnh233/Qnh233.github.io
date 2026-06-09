@@ -5,13 +5,17 @@
 }
 #main > .sidebar__right {
   position: absolute;
-  right: 10px;
+  right: 0;
   top: 0;
-  width: 200px;
+  width: 190px;
   max-height: calc(100vh - 120px);
   overflow-y: auto;
   font-size: 13px;
   z-index: 5;
+}
+/* Make room for TOC by reducing page width */
+#main > .sidebar__right ~ .page {
+  padding-right: 210px;
 }
 #main > .sidebar__right .toc {
   background: #f8f9fa;
@@ -53,12 +57,17 @@
 }
 @media (min-width: 1280px) {
   #main > .sidebar__right {
-    right: 20px;
-    width: 240px;
+    width: 210px;
+  }
+  #main > .sidebar__right ~ .page {
+    padding-right: 230px;
   }
 }
 @media (max-width: 1100px) {
   #main > .sidebar__right {
     display: none;
+  }
+  #main > .sidebar__right ~ .page {
+    padding-right: 0;
   }
 }
