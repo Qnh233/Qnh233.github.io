@@ -1,32 +1,36 @@
 /* TOC right sidebar */
-.page__inner-wrap {
+#main {
   position: relative;
+  overflow: visible;
 }
-.sidebar__right {
+#main > .sidebar__right {
   position: absolute;
-  right: -220px;
+  right: 10px;
   top: 0;
   width: 200px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
   font-size: 13px;
+  z-index: 5;
 }
-.sidebar__right .toc {
+#main > .sidebar__right .toc {
   background: #f8f9fa;
   border: 1px solid #e0e0e0;
   border-radius: 4px;
   padding: 12px;
 }
-.sidebar__right .toc .nav__title {
+#main > .sidebar__right .toc .nav__title {
   color: #333;
   font-size: 14px;
   margin: 0 0 8px 0;
   padding: 0;
 }
-.sidebar__right .toc__menu {
+#main > .sidebar__right .toc__menu {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.sidebar__right .toc__menu a {
+#main > .sidebar__right .toc__menu a {
   display: block;
   padding: 2px 0;
   color: #555;
@@ -34,27 +38,27 @@
   font-size: 12px;
   line-height: 1.4;
 }
-.sidebar__right .toc__menu a:hover {
+#main > .sidebar__right .toc__menu a:hover {
   color: #2f7f93;
   text-decoration: underline;
 }
-.sidebar__right .toc__menu ul {
+#main > .sidebar__right .toc__menu ul {
   list-style: none;
   padding-left: 12px;
   margin: 0;
 }
-.sidebar__right .toc__menu > li > a {
+#main > .sidebar__right .toc__menu > li > a {
   font-weight: 600;
   color: #333;
 }
 @media (min-width: 1280px) {
-  .sidebar__right {
-    right: -260px;
+  #main > .sidebar__right {
+    right: 20px;
     width: 240px;
   }
 }
-@media (max-width: 1024px) {
-  .sidebar__right {
+@media (max-width: 1100px) {
+  #main > .sidebar__right {
     display: none;
   }
 }
