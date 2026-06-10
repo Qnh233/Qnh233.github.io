@@ -74,7 +74,8 @@ blog开端
 
 参加cvte的极客π比赛拿奖了，展示一下😁
 
-<!-- image_token:TfIqbXBhNoQCiRxZezEc5oksnue -->
+![](/assets/images/posts/2026/feishu-TfIqbXBhNoQC.png)
 > 📷 *图片待同步*
+
 
 
