@@ -28,7 +28,7 @@ author:
   pronouns         : # example: "she/her"  
   bio              : "码头搞薯条"
   location         : "China"
-  employer         : "Red Brick University"
+  employer         : "sicau"
   uri              : # URL
   email            : "haoxu1127@gmail.com"
 
@@ -80,7 +80,8 @@ author:
   wikipedia        : # Username
   xing             : # Username
   youtube          : # Username
-  zhihu            : # Username
+  zhihu            : "https://www.zhihu.com/people/xu-hao-30-77"
+  bilibili         : "https://space.bilibili.com/15993951?spm_id_from=333.1007.0.0"
 
 # Publication Category - The following the list of publication categories and their headings
 publication_category:
