@@ -8,28 +8,28 @@ main:
     url: /claude-blog/
 
   - title: "Agent"
-    url: /tags/#agent
+    url: /tags/agent/
 
   - title: "LLM"
-    url: /tags/#llm
+    url: /tags/llm/
 
   - title: "CV"
-    url: /tags/#cv
+    url: /tags/cv/
 
   - title: "项目"
-    url: /tags/#项目
+    url: /tags/项目/
 
   - title: "学习笔记"
-    url: /tags/#学习笔记
+    url: /tags/学习笔记/
 
   - title: "复盘"
-    url: /tags/#复盘
+    url: /tags/复盘/
 
   - title: "评估"
-    url: /tags/#评估
+    url: /tags/评估/
 
   - title: "架构"
-    url: /tags/#架构
+    url: /tags/架构/
 
   - title: "📝 日志"
     url: /categories/#日志

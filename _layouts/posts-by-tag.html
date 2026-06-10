@@ -1,0 +1,17 @@
+---
+layout: archive
+---
+
+{{ content }}
+
+{% assign tag = page.tag | default: page.title %}
+{% assign posts = site.tags[tag] %}
+
+{% if posts %}
+  <h2 class="archive__subtitle">{{ tag }}</h2>
+  {% for post in posts %}
+    {% include archive-single.html %}
+  {% endfor %}
+{% else %}
+  <p>暂无「{{ tag }}」标签的文章。</p>
+{% endif %}
