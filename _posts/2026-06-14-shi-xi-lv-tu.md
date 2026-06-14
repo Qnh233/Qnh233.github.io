@@ -1,26 +1,13 @@
 ---
 title: '实习旅途'
 date: 2026-06-14
-permalink: /posts/2026/06/实习旅途/
-tags:
-  - 复盘
-  - 学习笔记
-  - 架构
-  - Agent
-  - 项目
-modified: 2026-06-14
----
-
----
-title: "实习旅途"
-date: 2026-06-14
 last_modified_at: 2026-06-14
+permalink: /posts/2026/06/实习旅途/
 categories: 复盘
 tags:
   - 复盘
-  - 实习
-  - 工作
-  - 学习笔记
+  - 实习笔记
+modified: 2026-06-14
 ---
 
 > 实习、工作、学习、日志
