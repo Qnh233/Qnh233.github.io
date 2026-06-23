@@ -11,12 +11,12 @@
   if (!c) return;
   var s = document.querySelector('.page__content');
   if (!s) return;
-  var h = s.querySelectorAll('h2, h3');
+  var h = s.querySelectorAll('h1, h2, h3');
   if (!h.length) { c.parentElement.parentElement.style.display = 'none'; return; }
 
   var html = '', stack = [];
   h.forEach(function(e) {
-    var lv = parseInt(e.tagName.charAt(1)) - 1;
+    var lv = parseInt(e.tagName.charAt(1));
     var id = e.getAttribute('id');
     if (!id) {
       id = e.textContent.trim().toLowerCase().replace(/[^\w\u4e00-\u9fff\s-]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'');
