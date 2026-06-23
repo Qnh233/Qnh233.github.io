@@ -7,10 +7,10 @@
 # server process.
 
 # Basic Site Settings
-locale                   : "zh-CN"
+locale                   : "en-US"
 site_theme               : "default" # The available themes options are "default", "air", "sunrise", "mint", "dirt" and "contrast"
 title                    : "必燃空间"
-title                    : "必燃空间"
+title_separator          : "-"
 name                     : &name "Keqiang Xu"
 description              : &description "码头搞薯条"
 url                      : https://qnh233.github.io
@@ -28,7 +28,7 @@ author:
   pronouns         : # example: "she/her"  
   bio              : "码头搞薯条"
   location         : "China"
-  employer         : "SICAU"
+  employer         : "sicau"
   uri              : # URL
   email            : "haoxu1127@gmail.com"
 
@@ -360,4 +360,3 @@ compress_html:
   clippings: all
   ignore:
     envs: development
-
