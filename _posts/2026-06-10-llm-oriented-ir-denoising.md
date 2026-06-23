@@ -8,9 +8,7 @@ tags:
   - 学习笔记
 ---
 
-<quote-container>
-Agent、IR、RAG、笔记、学习、综述
-</quote-container>
+> Agent、IR、RAG、笔记、学习、综述
 
 # 论文笔记：LLM-Oriented IR — A Denoising-First Perspective
 **论文信息**
