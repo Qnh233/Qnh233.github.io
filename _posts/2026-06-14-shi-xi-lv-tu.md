@@ -3,11 +3,8 @@ title: '实习旅途'
 date: 2026-06-14
 permalink: /posts/2026/06/实习旅途/
 tags:
-  - 复盘
-  - 项目
-  - Agent
   - 学习笔记
-last_modified_at: 2026-06-14
+  - 复盘
 ---
 
 > 实习、工作、学习、日志

@@ -3,10 +3,8 @@ title: '论文笔记：LLM-Oriented IR — A Denoising-First Perspective'
 date: 2026-06-10
 permalink: /posts/2026/06/论文笔记llm-oriented-ir-a-denoising-first-perspective/
 tags:
-  - Agent
   - LLM
   - 学习笔记
-last_modified_at: 2026-06-10
 ---
 
 > Agent、IR、RAG、笔记、学习、综述

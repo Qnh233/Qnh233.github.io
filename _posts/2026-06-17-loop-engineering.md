@@ -1,12 +1,10 @@
 ---
-title: 'Loop Engineering 循环工程'
+title: 'Loop Engineering'
 date: 2026-06-17
-permalink: /posts/2026/06/loop-engineering-循环工程/
+permalink: /posts/2026/06/loop-engineering/
 tags:
   - Agent
   - 架构
-  - 学习笔记
-last_modified_at: 2026-06-17
 ---
 
 ## 前言
