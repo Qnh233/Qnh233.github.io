@@ -2,9 +2,32 @@
 
 Anthropic 官方博客 [claude.com/blog](https://claude.com/blog) 文章追踪。按发布日期降序排列，最新文章在最上方。
 
-> 首次同步：2026-05-10 | 共 80 篇 | 每日自动更新
+> 首次同步：2026-05-10 | 共 84 篇 | 每日自动更新
 
-## NEW: 3 articles added (2026-07-24 sync)
+### NEW: 4 articles added (2026-07-25 sync)
+### 1. Four role-based certifications for the people who put Claude to work for customers
+- **日期**：2026-07-25（待确认）
+- **分类**：Certification / Education
+- **🔗**：[原文](https://claude.com/blog/four-role-based-claude-certifications)Anthropic 推出四大角色认证体系，为使用 Claude 为客户创造价值的专业人员提供标准化认证路径。
+
+### 2. Claude models explained: choosing the best model for your use case
+- **日期**：2026-07-25（待确认）
+- **分类**：Guide / Model Selection
+- **🔗**：[原文](https://claude.com/blog/claude-models-explained-choosing-the-best-model-for-your-use-case)详解各版本 Claude 模型差异及适用场景选择指南——帮助开发者根据需求选择最优模型配置。
+
+### 3. The new rules of context engineering for Claude 5 generation models
+- **日期**：2026-07-25（待确认）
+- **分类**：Guide / Context Engineering
+- **🔗**：[原文](https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models)Claude 5 时代上下文工程新规则——在新一代模型中更有效地组织提示和上下文以实现最佳性能。
+
+### 4. How the product designer who built Claude Design uses it
+- **日期**：2026-07-25（待确认）
+- **分类**：Product / Case Study
+- **🔗**：[原文](https://claude.com/blog/how-the-product-designer-who-built-claude-design-uses-it-to-explore-ideas-before-building-them)Claude Design 构建者分享如何利用 Claude 在设计构建前探索创意——来自产品设计团队的内部实践。
+
+---
+
+### 1. How Outtake built a cyber investigator on Claude
 
 ### 1. How Outtake built a cyber investigator on Claude
 - **日期**：2026-07-23
@@ -440,4 +463,4 @@ Anthropic 官方博客 [claude.com/blog](https://claude.com/blog) 文章追踪�
 
 ---
 
-最后更新：2026-07-24 · 共 80 篇文章
+最后更新：2026-07-25 · 共 84 篇文章
