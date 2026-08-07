@@ -2,7 +2,45 @@
 
 Anthropic 官方博客 [claude.com/blog](https://claude.com/blog) 文章追踪。按发布日期降序排列，最新文章在最上方。
 
-> 首次同步：2026-05-10 | 共 84 篇 | 每日自动更新
+> 首次同步：2026-05-10 | 共 91 篇 | 每日自动更新
+
+### NEW: 7 articles added (2026-08-07 sync)
+### 1. Auto mode is now the default in Claude Code for Pro, Max, and Team plans
+- **日期**：2026-08-07
+- **分类**：Claude Code
+- **🔗**：[原文](https://claude.com/blog/auto-mode-default-in-claude-code)Claude Code 将 Pro、Max 和 Team 计划的 auto mode 设为默认模式，支持更长时间的自主工作流，测试中捕获的危险命令比手动审查更多。
+
+### 2. Running auto mode in production
+- **日期**：2026-08-07
+- **分类**：Claude Code
+- **🔗**：[原文](https://claude.com/blog/auto-mode-in-production)Nuro、Gusto 和 Garner Health 团队如何在生产环境中使用 auto mode 平衡速度与安全性。
+
+### 3. Millennium and Anthropic are building a digital risk analyst with Claude
+- **日期**：2026-08-06
+- **分类**：Claude Code
+- **🔗**：[原文](https://claude.com/blog/millennium-and-anthropic-are-building-a-digital-risk-analyst-with-claude)Anthropic 与世界最大的另类资产管理公司之一的 Millennium 合作，共同开发数字风险分析师——一个在监督下与人类并肩工作的 AI 同事。
+
+### 4. Inference hooks: inline data loss prevention for Claude Enterprise
+- **日期**：2026-08-05
+- **分类**：Product announcements
+- **🔗**：[原文](https://claude.com/blog/claude-enterprise-inference-hooks)Inference hooks 让合规团队在每条 prompt 和工具调用响应到达 Claude 之前进行检查和策略执行——覆盖 Claude Enterprise 的所有交互界面，包括 chat、Claude Code、Claude Cowork 等。
+
+### 5. A guide to cost visibility and control in Claude
+- **日期**：2026-08-04
+- **分类**：Enterprise AI
+- **🔗**：[原文](https://claude.com/blog/a-guide-to-cost-visibility-and-control-in-claude)了解如何在 Claude Enterprise 上通过成本管控优化支出，面向 IT 管理员。
+
+### 6. Run Claude Code sessions on your own compute
+- **日期**：2026-08-06
+- **分类**：Enterprise AI
+- **🔗**：[原文](https://claude.com/blog/run-claude-code-sessions-on-your-own-compute)自托管环境现已公开测试——在你自己的基础设施上运行 Claude Code 会话。可从 Web、移动端、桌面端或例行任务启动，会话在您的网络内执行。
+
+### 7. Bringing MCP 2026-07-28 to Claude
+- **日期**：2026-07-28
+- **分类**：Enterprise AI
+- **🔗**：[原文](https://claude.com/blog/bringing-mcp-2026-07-28-to-claude)MCP 月度 SDK 下载量突破 4 亿，今年增长 4 倍，已成为连接 AI 智能体与应用的标准协议。MCP 2026-07-28 是最重要的版本更新之一。
+
+---
 
 ### NEW: 4 articles added (2026-07-25 sync)
 ### 1. Four role-based certifications for the people who put Claude to work for customers
