@@ -2,7 +2,20 @@
 
 Anthropic 官方博客 [claude.com/blog](https://claude.com/blog) 文章追踪。按发布日期降序排列，最新文章在最上方。
 
-> 首次同步：2026-05-10 | 共 91 篇 | 每日自动更新
+> 首次同步：2026-05-10 | 共 93 篇 | 每日自动更新
+
+### NEW: 2 articles added (2026-08-17 sync)
+### 1. How Claude's text watermark works
+- **日期**：2026-08-14
+- **分类**：Announcements
+- **🔗**：[原文](https://www.anthropic.com/news/claude-text-watermark)Claude 生成的文本将包含水印，用于判断文本是否由 Claude 参与撰写。这是为满足欧盟 AI 法案要求而实施的技术方案——使用不影响输出质量和内容的水印方法，不添加额外 token 成本，也不包含可追溯信息。
+
+### 2. Improving Fable 5's biology safeguards
+- **日期**：2026-08-07
+- **分类**：Product
+- **🔗**：[原文](https://www.anthropic.com/news/improving-fable-5-s-biology-safeguards)Claude Fable 5 生物学安全策略优化——将生物学相关误触发回退率降低约 85%，使 Fable 5 能更好地协助医疗解读、症状分析和教育类生物问题。
+
+---
 
 ### NEW: 7 articles added (2026-08-07 sync)
 ### 1. Auto mode is now the default in Claude Code for Pro, Max, and Team plans
