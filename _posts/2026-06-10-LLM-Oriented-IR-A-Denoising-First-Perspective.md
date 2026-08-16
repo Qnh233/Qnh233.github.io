@@ -1,7 +1,7 @@
 ---
-title: '论文笔记：LLM-Oriented IR — A Denoising-First Perspective'
+title: 'LLM-Oriented IR — A Denoising-First Perspective'
 date: 2026-06-10
-permalink: /posts/2026/06/论文笔记llm-oriented-ir-a-denoising-first-perspective/
+permalink: /posts/2026/06/llm-oriented-ir-a-denoising-first-perspective/
 tags:
   - LLM
   - 学习笔记
