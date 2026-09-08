@@ -1,10 +1,8 @@
 ---
-title: 'Loop Engineering 循环工程'
-date: 2026-06-17
-permalink: /posts/2026/06/loop-engineering-循环工程/
-tags:
-  - Agent
-  - 学习笔记
+title: Loop Engineering 循环工程
+date: 2026-06-17 12:00:00 +0800
+categories: [Agent]
+tags: [Agent, 学习笔记]
 ---
 
 ## 前言
@@ -13,7 +11,7 @@ tags:
 
 前面四个工程都可以视为对agent的激发、驾驭。到了loop工程，就将主角变换到人所承担的角色，以前常说人在loop中，那具体的角色应该是什么呢？审计者还是指挥官？作为指挥的层级是ceo还是leader？
 
-![](/assets/images/posts/2026/feishu-CnLpbLuPLoSP.png)
+![](/assets/img/posts/feishu-CnLpbLuPLoSP.png)
 > 📷 *图片待同步*
 
 其实从这些角度看演进，loop 工程也同样是有人已经做过类似的，而后才提出这么个名词概念，当然我们深究下去是不同的。在单轮对话中，比如claude code是能实现这种loop，而其中提到的计划 评估 反思 记忆 循环，这过程其实都是agent自己来决定要不要走，或者说利用skill启动这个工作流。没错这可以作为工作流给到agent开启这个循环。比如codex的goal模式，会以一个目标不断循环迭代下去。

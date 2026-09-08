@@ -1,10 +1,8 @@
 ---
-title: 'LLM-Oriented IR — A Denoising-First Perspective'
-date: 2026-06-10
-permalink: /posts/2026/06/llm-oriented-ir-a-denoising-first-perspective/
-tags:
-  - LLM
-  - 学习笔记
+title: LLM-Oriented IR — A Denoising-First Perspective
+date: 2026-06-10 12:00:00 +0800
+categories: [论文笔记]
+tags: [LLM, 学习笔记]
 ---
 
 > Agent、IR、RAG、笔记、学习、综述
