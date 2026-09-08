@@ -236,3 +236,5 @@ jekyll-archives:
   permalinks:
     tag: /tags/:name/
     category: /categories/:name/
+
+# trigger rebuild: switch to GitHub Actions deployment
