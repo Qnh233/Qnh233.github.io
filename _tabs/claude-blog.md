@@ -6,7 +6,88 @@ order: 5
 
 Anthropic 官方博客 [claude.com/blog](https://claude.com/blog) 文章追踪。按发布日期降序排列，最新文章在最上方。
 
-> 首次同步：2026-05-10 | 共 93 篇 | 每日自动更新
+> 首次同步：2026-05-10 | 共 108 篇 | 每日自动更新
+
+---
+
+### NEW: 15 articles added (2026-09-08 sync)
+### 1. A guide to the anatomy of effective commerce agents
+- **日期**：2026-09-02
+- **分类**：Agents / Guide
+- **🔗**：[原文](https://claude.com/blog/the-anatomy-of-effective-commerce-agents)These agents are in production, and enterprise customers have seen larger carts and more efficient seller operations when using them. They also share a simple architecture: Claude in an agent loop equipped with a set of skills, tools, and a strong eval suite. This post is for…
+
+### 2. Building Commerce Agents with Claude
+- **日期**：2026-09-02
+- **分类**：Product / Agents
+- **🔗**：[原文](https://claude.com/blog/claude-for-commerce-agents)Today, we're launching a blueprint to help build commerce agents on Claude. It contains the harnesses, patterns, and guardrails an engineering team needs to get a commerce agent running in days, with reference implementations of a shopping agent and a merchant agent for retail…
+
+### 3. How Anthropic employees use Claude Tag
+- **日期**：2026-08-28
+- **分类**：Claude Tag
+- **🔗**：[原文](https://claude.com/blog/how-anthropic-employees-use-claude-tag)We’ve assembled more than a dozen use case examples for Claude Tag inspired by our work at Anthropic, along with specific prompts and setup instructions. In this post, we highlight three ways Anthropic employees are making their workflows and processes more efficient with Claude…
+
+### 4. Claude for Teachers, now available for U.S. K-12 schools and districts
+- **日期**：2026-08-28
+- **分类**：Product
+- **🔗**：[原文](https://claude.com/blog/claude-for-teachers-now-available-for-schools-and-districts)Starting today, Claude for Teachers is available to schools and districts as a free Enterprise offering. School and district leaders can now bring educators and staff into one centrally managed organization under a single set of K-12 Terms, with enterprise features like single…
+
+### 5. How Warp builds self-improving agents on Claude
+- **日期**：2026-08-26
+- **分类**：Agents / Case Study
+- **🔗**：[原文](https://claude.com/blog/how-warp-builds-self-improving-agents-on-claude)Agents need to handle recurring tasks reliably and effectively. A first-pass prompt that gets 80% of the task correct can create a noisy and annoying experience for the user. Warp learned this the hard way, and used this to inform its product strategy, creating an improved…
+
+### 6. Claude in Chrome is generally available
+- **日期**：2026-08-26
+- **分类**：Product announcements
+- **🔗**：[原文](https://claude.com/blog/claude-in-chrome-generally-available)Many of the tools you use every day connect to Claude. But many others don't, such as internal dashboards, legacy systems, and vendor portals. Claude in Chrome lets Claude access those.
+
+### 7. Claude gets its own browser in Cowork
+- **日期**：2026-08-26
+- **分类**：Product announcements
+- **🔗**：[原文](https://claude.com/blog/cowork-built-in-browser)Until now, giving Claude the ability to use the web in Cowork meant giving it access to your browser through the Claude in Chrome extension. Cowork now has its own built-in browser.
+
+### 8. Bain & Company joins the Claude Partner Network as a Global Premier partner
+- **日期**：2026-08-25
+- **分类**：Enterprise AI
+- **🔗**：[原文](https://claude.com/blog/bain-company-joins-the-claude-partner-network-as-a-global-premier-partner)The partnership builds on Bain's own deployment of Claude across the firm, which now serves as a reference point for how Bain advises clients on enterprise rollouts. Bain rolled out Claude to all 19,000 of its employees as part of the firm's suite of AI platforms and tools, for…
+
+### 9. Claude's memory works everywhere, and you decide what's in it
+- **日期**：2026-08-25
+- **分类**：Product announcements
+- **🔗**：[原文](https://claude.com/blog/claudes-memory-works-everywhere-and-you-decide-whats-in-it)Cowork now has memory, and it’s the same one you use in chat, leading to less re-explaining and more picking up where you left off. When Cowork runs a task in the cloud, what Claude remembers from your chats is there, and vice versa. The context you've built up across months of…
+
+### 10. How an Anthropic field marketer uses Claude Code to send weekly personalized updates to every sales rep
+- **日期**：2026-08-24
+- **分类**：Claude Code / Case Study
+- **🔗**：[原文](https://claude.com/blog/how-an-anthropic-field-marketer-uses-claude-code-to-send-weekly-personalized-updates-to-every-sales-rep)My initial solution was one many marketers will recognize: the 15-minute Monday morning stand-up with the sales team. I spent Sunday evenings collating updates from across the business and turning them into presentable slides, and then delivered the info live in the meeting and…
+
+### 11. Bringing the cybersecurity capabilities of Claude Mythos 5 to more defenders
+- **日期**：2026-08-21
+- **分类**：Security
+- **🔗**：[原文](https://claude.com/blog/bringing-claude-mythos-5-to-more-defenders)In April, we launched Project Glasswing to put our most capable frontier model, Claude Mythos Preview (and its successor, Claude Mythos 5), in the hands of a small group of organizations securing the world’s most critical software. This gave defenders a window of time to find…
+
+### 12. The AI-Native SDLC playbook
+- **日期**：2026-08-21
+- **分类**：Enterprise AI
+- **🔗**：[原文](https://claude.com/blog/the-ai-native-sdlc-playbook)Many engineering teams still have the same approval gates, reviews, handoffs, and policies, stalling productivity gains made by using agentic coding solutions like Claude Code. The software development lifecycle (SDLC) is the process that takes software from idea to production…
+
+### 13. Anthropic’s approach to teaching and learning AI
+- **日期**：2026-08-20
+- **分类**：Education
+- **🔗**：[原文](https://claude.com/blog/anthropics-approach-to-teaching-and-learning-ai)Today, we’re sharing our approach to designing and scaling AI instruction to millions of learners worldwide via Claude Academy. As model intelligence continues to evolve, the need for everyone to understand how to use AI safely and effectively becomes more urgent. Not only does…
+
+### 14. How monday.com transformed its platform into an agent-first product where humans and agents collaborate
+- **日期**：2026-08-20
+- **分类**：Enterprise AI / Case Study
+- **🔗**：[原文](https://claude.com/blog/how-monday-com-transformed-its-platform-into-an-agent-first-product-where-humans-and-agents-collaborate)"The shift to an agent-first product was one of the most significant decisions we've made as a company," said Daniel Lereya, chief product and technology officer at monday.com. "It meant fundamentally reimagining what the platform should do, not just adding AI to existing…
+
+### 15. The Claude Code Guide For Startups
+- **日期**：2026-08-20
+- **分类**：Claude Code
+- **🔗**：[原文](https://claude.com/blog/claude-code-guide-for-startups)If you want to take a peek at the future of work, ask startups how they are operating today. So we did. We spoke with more than a dozen fast-growing startups about how they use agentic coding tools to build products and scale their companies. These startups are changing the…
+
+---
+
 
 ### NEW: 2 articles added (2026-08-17 sync)
 ### 1. How Claude's text watermark works
@@ -518,4 +599,4 @@ Anthropic 官方博客 [claude.com/blog](https://claude.com/blog) 文章追踪�
 
 ---
 
-最后更新：2026-07-25 · 共 84 篇文章
+最后更新：2026-09-08 · 共 108 篇文章
