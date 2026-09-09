@@ -25,11 +25,14 @@ module DatelessPosts
       return unless File.directory?(base_dir)
 
       existing = posts.docs.map(&:path)
+      skip_dirs = [File.join(base_dir, "Template"), File.join(base_dir, "Templates")]
 
       Dir.glob(File.join(base_dir, "**", "*.md")).each do |full|
         base = File.basename(full)
         next if existing.include?(full)
         next if base.start_with?("_", ".")
+        next if skip_dirs.any? { |d| full.start_with?(d + File::SEPARATOR) }
+        next if full =~ %r{/\.{1,2}\.md\z}
 
         begin
           doc = Jekyll::Document.new(full, site: site, collection: posts)

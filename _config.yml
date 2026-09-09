@@ -228,6 +228,8 @@ exclude:
   - purgecss.js
   - "*.config.js"
   - "package*.json"
+  - "_posts/Template"
+  - "_posts/Templates"
 
 jekyll-archives:
   enabled: [categories, tags]
