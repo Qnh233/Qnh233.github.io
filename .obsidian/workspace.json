@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "283ff1ab5e7c117c",
+        "id": "2b21101d3746405c",
         "type": "tabs",
         "children": [
           {
-            "id": "07cd0180087a9243",
+            "id": "05d56665ab30744b",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "_posts/note/day/2026-09-09.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "2026-09-09"
             }
           }
         ]
@@ -38,7 +42,7 @@
               "state": {
                 "sortOrder": "alphabetical",
                 "autoReveal": false,
-                "showSearch": false,
+                "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
@@ -79,7 +83,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 352.70001220703125
   },
   "right": {
     "id": "a2a136af04412816",
@@ -95,6 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "_posts/note/day/2026-09-09.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -113,6 +118,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "wiki/purpose.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -155,7 +161,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "未命名.base",
+                "file": "_posts/note/day/2026-09-09.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -172,6 +178,16 @@
               "state": {},
               "icon": "git-pull-request",
               "title": "Source Control"
+            }
+          },
+          {
+            "id": "6b51d5e259fd49e1",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {},
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
             }
           }
         ],
@@ -190,19 +206,49 @@
       "templates:插入模板": false,
       "command-palette:打开命令面板": false,
       "bases:新建数据库": false,
-      "obsidian-git:Open Git source control": false
+      "obsidian-git:Open Git source control": false,
+      "obsidian-excalidraw-plugin:新建绘图文件": false,
+      "templater-obsidian:Templater": false,
+      "terminal:Open terminal": false,
+      "periodic-notes:Open today": false
     }
   },
-  "active": "8a898da563129f3d",
+  "active": "693947286ded0257",
   "lastOpenFiles": [
-    "未命名.base",
-    "_posts/2026-06-17-Loop-Engineering-循环工程.md",
-    "_posts/2026-06-14-实习旅途.md",
+    "_posts/Template/博客模板.md",
+    "_plugins/dateless-posts.rb",
+    "_posts/2026-09-09-Agent资产质量评估框架.md",
+    "_posts/从用户需求到Agent分发的完整链路.md",
+    "_posts/2026-09-09-从用户需求到Agent分发的完整链路.md",
+    "_posts/Agent资产质量评估框架.md",
+    "_posts/2026-07-05-游戏记录.md",
     "_posts/2026-07-02-API-号经验帖.md",
+    "_posts/2026-06-17-Loop-Engineering-循环工程.md",
+    "_posts/note/day/2026-09-09.md",
+    "_posts/2026-06-14-实习旅途.md",
     "_posts/2026-06-10-LLM-Oriented-IR-A-Denoising-First-Perspective.md",
-    "_tabs/about.md",
-    "_tabs/archives.md",
-    "2026-09-08.md",
-    "README.md"
+    "_posts/note/week/2026-W37.md",
+    "Excalidraw/Drawing 2026-09-09 21.48.09.excalidraw.md",
+    "Excalidraw",
+    "wiki/principles/llm-oriented-ir-denoising.md",
+    "wiki/changelog.md",
+    "wiki/Wiki-Agent-Rules.md",
+    "wiki/log.md",
+    "wiki/How-To-Use-This-Wiki.md",
+    "_posts/Template/概念思考模板.md",
+    "_posts/Template/2026-06-17-Loop-Engineering-循环工程 1.md",
+    "wiki/inbox.md",
+    "wiki/index.md",
+    "wiki/principles/2026-09-09-技术选型横向对比理由.md",
+    "wiki/inbox/飞书思维笔记无开放API-mm思维导图只能手动导入.md",
+    "wiki/inbox/OpenBMB昇腾竞赛-DevEnv环境连接差异踩坑.md",
+    "wiki/meetings",
+    "wiki/weekly",
+    "wiki/workflows",
+    "wiki/principles",
+    "wiki/decisions",
+    "wiki/projects",
+    "wiki/concepts",
+    "wiki"
   ]
 }

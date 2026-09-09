@@ -1,1 +1,5 @@
-{}
+{
+  "nativeMenus": true,
+  "cssTheme": "Minimal",
+  "accentColor": "#4b40a0"
+}
