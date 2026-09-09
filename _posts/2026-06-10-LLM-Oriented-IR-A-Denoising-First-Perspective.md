@@ -135,7 +135,5 @@ tags: [LLM, 学习笔记]
 
 ---
 
-> 知识库概念：[LLM-Oriented IR 降噪优先](../wiki/principles/llm-oriented-ir-denoising.md)
-
 
 

@@ -78,7 +78,5 @@ k8s的运维中你的期望状态是确定的，比如cpu占用率，延时等�
 
 ---
 
-> 知识库概念：[Loop Engineering 循环工程](../wiki/principles/loop-engineering.md)
-
 
 
