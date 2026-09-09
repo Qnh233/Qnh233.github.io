@@ -133,5 +133,9 @@ tags: [LLM, 学习笔记]
 
 **一句话**：如果正做 RAG/Agent 系统，最值得投入的方向不是更好的 embedding 或更大的上下文窗口，而是**让进入 LLM 的每一条信息都是高密度、可验证的信号**。
 
+---
+
+> 知识库概念：[LLM-Oriented IR 降噪优先](../wiki/principles/llm-oriented-ir-denoising.md)
+
 
 

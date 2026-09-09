@@ -76,5 +76,9 @@ k8s的运维中你的期望状态是确定的，比如cpu占用率，延时等�
 
 > 如何让概率系统在工程上表现得像一个确定性系统。
 
+---
+
+> 知识库概念：[Loop Engineering 循环工程](../wiki/principles/loop-engineering.md)
+
 
 
