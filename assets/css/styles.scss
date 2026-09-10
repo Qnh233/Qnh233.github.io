@@ -1,10 +1,7 @@
 ---
-# Frontmatter empty — Jekyll processes this as a sass partial that gets merged
-# into the main stylesheet. Do not add `main: true`.
+# Custom CSS — merged after theme stylesheet.
+# Frontmatter must be empty (no `main: true`).
 ---
-
-@import
-  "jekyll-theme-chirpy";
 
 /* 中文排版优化：首行缩进 + 行间距 */
 
