@@ -5,5 +5,11 @@
   "periodic-notes",
   "obsidian-tasks-plugin",
   "templater-obsidian",
-  "terminal"
+  "terminal",
+  "supermind",
+  "local-bg-image-server",
+  "realtime-transcription",
+  "editing-toolbar",
+  "codeblock-customizer",
+  "gantt-calendar"
 ]

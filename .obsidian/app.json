@@ -1,1 +1,7 @@
-{}
+{
+  "attachmentFolderPath": "assets/attachments",
+  "showUnsupportedFiles": false,
+  "useMarkdownLinks": true,
+  "strictLineBreaks": true,
+  "autoConvertHtml": true
+}

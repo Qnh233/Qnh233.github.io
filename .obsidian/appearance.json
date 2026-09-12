@@ -1,5 +1,8 @@
 {
-  "nativeMenus": true,
+  "nativeMenus": false,
   "cssTheme": "Minimal",
-  "accentColor": "#4b40a0"
+  "accentColor": "#4b40a0",
+  "enabledCssSnippets": [
+    "中文排版"
+  ]
 }

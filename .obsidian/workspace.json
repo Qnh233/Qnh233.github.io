@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "2b21101d3746405c",
+        "id": "253c4ebf54d1b4fd",
         "type": "tabs",
         "children": [
           {
-            "id": "05d56665ab30744b",
+            "id": "5a88239750f114ee",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/note/day/2026-09-09.md",
+                "file": "_posts/多智能体实践.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-09-09"
+              "title": "多智能体实践"
             }
           }
         ]
@@ -83,7 +83,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 352.70001220703125
+    "width": 352.70001220703125,
+    "collapsed": true
   },
   "right": {
     "id": "a2a136af04412816",
@@ -92,40 +93,8 @@
       {
         "id": "f5a7b0f95a8bab48",
         "type": "tabs",
+        "dimension": 38.93129770992366,
         "children": [
-          {
-            "id": "3566f0ae5a2b2d64",
-            "type": "leaf",
-            "state": {
-              "type": "backlink",
-              "state": {
-                "file": "_posts/note/day/2026-09-09.md",
-                "collapseAll": false,
-                "extraContext": false,
-                "sortOrder": "alphabetical",
-                "showSearch": false,
-                "searchQuery": "",
-                "backlinkCollapsed": false,
-                "unlinkedCollapsed": true
-              },
-              "icon": "links-coming-in",
-              "title": "反向链接"
-            }
-          },
-          {
-            "id": "1cd7a4e7619cda55",
-            "type": "leaf",
-            "state": {
-              "type": "outgoing-link",
-              "state": {
-                "file": "wiki/purpose.md",
-                "linksCollapsed": false,
-                "unlinkedCollapsed": true
-              },
-              "icon": "links-going-out",
-              "title": "出链"
-            }
-          },
           {
             "id": "9e963a495ec7f850",
             "type": "leaf",
@@ -161,8 +130,8 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/note/day/2026-09-09.md",
-                "followCursor": false,
+                "file": "_posts/未命名.md",
+                "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
@@ -170,6 +139,79 @@
               "title": "大纲"
             }
           },
+          {
+            "id": "6b51d5e259fd49e1",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "calendar",
+              "state": {},
+              "pinned": true,
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
+            }
+          },
+          {
+            "id": "8cec46b4ebb0eb4e",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "_posts/进程-线程-协程.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "反向链接"
+            }
+          },
+          {
+            "id": "485eb76e54e6f632",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "_posts/算法/算法刷题记录.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "出链"
+            }
+          },
+          {
+            "id": "e254dced455bbe9a",
+            "type": "leaf",
+            "state": {
+              "type": "gantt-calendar-sidebar-view",
+              "state": {},
+              "icon": "goal",
+              "title": "Gantt calendar"
+            }
+          },
+          {
+            "id": "a2c2f7a562447aa9",
+            "type": "leaf",
+            "state": {
+              "type": "realtime-transcription-view",
+              "state": {},
+              "icon": "microphone",
+              "title": "实时语音转写"
+            }
+          }
+        ],
+        "currentTab": 6
+      },
+      {
+        "id": "02a277ddce1e161b",
+        "type": "tabs",
+        "dimension": 61.06870229007634,
+        "children": [
           {
             "id": "693947286ded0257",
             "type": "leaf",
@@ -179,23 +221,12 @@
               "icon": "git-pull-request",
               "title": "Source Control"
             }
-          },
-          {
-            "id": "6b51d5e259fd49e1",
-            "type": "leaf",
-            "state": {
-              "type": "calendar",
-              "state": {},
-              "icon": "calendar-with-checkmark",
-              "title": "Calendar"
-            }
           }
-        ],
-        "currentTab": 5
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 299.0999755859375
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -210,45 +241,58 @@
       "obsidian-excalidraw-plugin:新建绘图文件": false,
       "templater-obsidian:Templater": false,
       "terminal:Open terminal": false,
+      "realtime-transcription:实时语音转写": false,
+      "gantt-calendar:甘特日历": false,
       "periodic-notes:Open today": false
     }
   },
-  "active": "693947286ded0257",
+  "active": "e254dced455bbe9a",
   "lastOpenFiles": [
-    "_posts/Template/博客模板.md",
-    "_plugins/dateless-posts.rb",
-    "_posts/2026-09-09-Agent资产质量评估框架.md",
-    "_posts/从用户需求到Agent分发的完整链路.md",
-    "_posts/2026-09-09-从用户需求到Agent分发的完整链路.md",
-    "_posts/Agent资产质量评估框架.md",
-    "_posts/2026-07-05-游戏记录.md",
-    "_posts/2026-07-02-API-号经验帖.md",
-    "_posts/2026-06-17-Loop-Engineering-循环工程.md",
-    "_posts/note/day/2026-09-09.md",
-    "_posts/2026-06-14-实习旅途.md",
-    "_posts/2026-06-10-LLM-Oriented-IR-A-Denoising-First-Perspective.md",
-    "_posts/note/week/2026-W37.md",
-    "Excalidraw/Drawing 2026-09-09 21.48.09.excalidraw.md",
-    "Excalidraw",
-    "wiki/principles/llm-oriented-ir-denoising.md",
-    "wiki/changelog.md",
-    "wiki/Wiki-Agent-Rules.md",
-    "wiki/log.md",
-    "wiki/How-To-Use-This-Wiki.md",
+    "assets/attachments/107fc3dcfde09c751089785a3366befa.png",
+    "assets/attachments/5e3de5fea303df368e681bbf1389d0a2.png",
+    "assets/attachments/Pasted image 20260912150644.png",
+    "assets/attachments/35686c5d830d564d85c87bb1067b4563.png",
+    "assets/attachments/767feb2d585740a2a2f1939241f5b6ba 1.png",
+    "assets/attachments/767feb2d585740a2a2f1939241f5b6ba.png",
+    "assets/attachments/4f505db73966243264c6b821a56965d8.png",
     "_posts/Template/概念思考模板.md",
-    "_posts/Template/2026-06-17-Loop-Engineering-循环工程 1.md",
-    "wiki/inbox.md",
-    "wiki/index.md",
-    "wiki/principles/2026-09-09-技术选型横向对比理由.md",
-    "wiki/inbox/飞书思维笔记无开放API-mm思维导图只能手动导入.md",
-    "wiki/inbox/OpenBMB昇腾竞赛-DevEnv环境连接差异踩坑.md",
-    "wiki/meetings",
-    "wiki/weekly",
-    "wiki/workflows",
-    "wiki/principles",
-    "wiki/decisions",
-    "wiki/projects",
-    "wiki/concepts",
-    "wiki"
+    "_posts/Template/日记模板.md",
+    "_posts/多智能体实践.md",
+    "assets/attachments/c7de5bd959060845b6e416f2a61c5db2.png",
+    "_posts/算法/算法刷题记录.md",
+    "_posts/2026-06-14-实习旅途.md",
+    "_posts/进程-线程-协程.md",
+    "_posts/FastAPI 应用解析.md",
+    "_posts/算法",
+    "_posts/健身.md",
+    "_posts/未命名思维导图.md",
+    "_posts/note/day/2026-09-10.md",
+    "_posts/2026-06-10-LLM-Oriented-IR-A-Denoising-First-Perspective.md",
+    "语音转写-2026-09-10-1643.md",
+    "_posts/Template/博客模板.md",
+    "_posts/2026-09-09-Agent资产质量评估框架.md",
+    "_posts/2026-09-09-从用户需求到Agent分发的完整链路.md",
+    "_posts/2026-06-17-Loop-Engineering-循环工程.md",
+    "assets/attachments/Pasted image 20260910143623.png",
+    "assets/attachments",
+    "assets/img/profile.png",
+    "assets/img/favicons/favicon-512x512.png",
+    "skills/excalidraw-diagram/SKILL.md",
+    "skills/outliner-note/SKILL.md",
+    "skills/outliner-note",
+    "skills/mermaid-visualizer/SKILL.md",
+    "skills/mermaid-visualizer",
+    "skills/excalidraw-diagram",
+    "skills/obsidian-bases/SKILL.md",
+    "skills/obsidian-bases",
+    "skills/json-canvas/SKILL.md",
+    "skills/json-canvas",
+    "skills/obsidian-markdown/SKILL.md",
+    "skills/obsidian-markdown",
+    "skills",
+    "assets/css/styles.scss",
+    "_posts/note/day/2026-09-09.md",
+    "_posts/从用户需求到Agent分发的完整链路.md",
+    "_posts/Agent资产质量评估框架.md"
   ]
 }
