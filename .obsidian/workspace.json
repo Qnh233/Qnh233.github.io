@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/多智能体实践.md",
+                "file": "_posts/健身.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "多智能体实践"
+              "title": "健身"
             }
           }
         ]
@@ -83,8 +83,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 352.70001220703125,
-    "collapsed": true
+    "width": 352.70001220703125
   },
   "right": {
     "id": "a2a136af04412816",
@@ -246,18 +245,21 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "e254dced455bbe9a",
+  "active": "5a88239750f114ee",
   "lastOpenFiles": [
+    "assets/attachments/pasted-image-20260912150644.png",
+    "assets/attachments/pasted-image-20260910143736.png",
+    "assets/attachments/pasted-image-20260910143623.png",
+    "_posts/多智能体实践.md",
+    "assets/attachments/4f505db73966243264c6b821a56965d8.png",
     "assets/attachments/107fc3dcfde09c751089785a3366befa.png",
     "assets/attachments/5e3de5fea303df368e681bbf1389d0a2.png",
     "assets/attachments/Pasted image 20260912150644.png",
     "assets/attachments/35686c5d830d564d85c87bb1067b4563.png",
     "assets/attachments/767feb2d585740a2a2f1939241f5b6ba 1.png",
     "assets/attachments/767feb2d585740a2a2f1939241f5b6ba.png",
-    "assets/attachments/4f505db73966243264c6b821a56965d8.png",
     "_posts/Template/概念思考模板.md",
     "_posts/Template/日记模板.md",
-    "_posts/多智能体实践.md",
     "assets/attachments/c7de5bd959060845b6e416f2a61c5db2.png",
     "_posts/算法/算法刷题记录.md",
     "_posts/2026-06-14-实习旅途.md",
@@ -273,10 +275,7 @@
     "_posts/2026-09-09-Agent资产质量评估框架.md",
     "_posts/2026-09-09-从用户需求到Agent分发的完整链路.md",
     "_posts/2026-06-17-Loop-Engineering-循环工程.md",
-    "assets/attachments/Pasted image 20260910143623.png",
     "assets/attachments",
-    "assets/img/profile.png",
-    "assets/img/favicons/favicon-512x512.png",
     "skills/excalidraw-diagram/SKILL.md",
     "skills/outliner-note/SKILL.md",
     "skills/outliner-note",

@@ -3,5 +3,7 @@
   "showUnsupportedFiles": false,
   "useMarkdownLinks": true,
   "strictLineBreaks": true,
-  "autoConvertHtml": true
+  "autoConvertHtml": true,
+  "newFileLocation": "current",
+  "newLinkFormat": "relative"
 }
