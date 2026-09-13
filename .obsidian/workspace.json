@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/算法/双指针算法.md",
+                "file": "_posts/note/day/2026-09-13.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "双指针算法"
+              "title": "2026-09-13"
             }
           }
         ]
@@ -129,7 +129,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/算法/双指针算法.md",
+                "file": "_posts/note/day/2026-09-13.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
@@ -245,10 +245,12 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "905c4cf6908b0afe",
+  "active": "5a88239750f114ee",
   "lastOpenFiles": [
-    "_posts/健身.md",
+    "_posts/note/day/2026-09-09.md",
+    "_posts/note/day/2026-09-13.md",
     "_posts/算法/双指针算法.md",
+    "_posts/健身.md",
     "assets/attachments/pasted-image-20260912150644.png",
     "assets/attachments/pasted-image-20260910143736.png",
     "assets/attachments/pasted-image-20260910143623.png",
@@ -290,8 +292,6 @@
     "skills/obsidian-markdown",
     "skills",
     "assets/css/styles.scss",
-    "_posts/note/day/2026-09-09.md",
-    "_posts/从用户需求到Agent分发的完整链路.md",
-    "_posts/Agent资产质量评估框架.md"
+    "_posts/从用户需求到Agent分发的完整链路.md"
   ]
 }
