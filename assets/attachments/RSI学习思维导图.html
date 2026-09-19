@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>递归自我改进（RSI）：从有界闭环到无界飞升</title>
+<style>
+:root {
+  --bg: #f7f8fa; --card: #ffffff; --ink: #1f2329; --muted: #6b7280;
+  --accent: #2563eb; --line: #e5e7eb; --chip: #eef2ff;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
+  line-height: 1.6;
+}
+header {
+  position: sticky; top: 0; z-index: 10; background: var(--card);
+  border-bottom: 1px solid var(--line); padding: 12px 24px;
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+header h1 { font-size: 18px; margin: 0; flex: 1 1 auto; }
+header .count { color: var(--muted); font-size: 13px; }
+header button {
+  border: 1px solid var(--line); background: var(--card); color: var(--ink);
+  border-radius: 6px; padding: 5px 12px; cursor: pointer; font-size: 13px;
+}
+header button:hover { background: var(--chip); }
+main { max-width: 1080px; margin: 0 auto; padding: 28px 24px 64px; }
+ul.tree, ul.tree ul { list-style: none; margin: 0; padding-left: 22px; }
+ul.tree { padding-left: 0; }
+ul.tree > li { position: relative; }
+ul.tree li {
+  margin: 4px 0; padding: 5px 12px 5px 16px;
+  border-left: 2px solid var(--line); border-radius: 0 8px 8px 0;
+  background: var(--card); transition: background .15s, border-color .15s;
+}
+ul.tree li:hover { background: var(--chip); border-left-color: var(--accent); }
+ul.tree li.leaf { cursor: default; }
+details summary {
+  cursor: pointer; font-weight: 600; color: var(--ink);
+  list-style: none; display: inline-block;
+}
+details summary::-webkit-details-marker { display: none; }
+details summary::before { content: "▾ "; color: var(--accent); }
+details:not([open]) summary::before { content: "▸ "; }
+details ul { margin-top: 6px; }
+code { background: #f0f1f3; border-radius: 4px; padding: 1px 5px; font-size: 90%; }
+strong { color: var(--accent); }
+footer { text-align: center; color: var(--muted); font-size: 12px; padding: 16px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🧠 递归自我改进（RSI）：从有界闭环到无界飞升</h1>
+  <span class="count">62 个节点</span>
+  <input id="q" type="search" placeholder="搜索节点…" style="border:1px solid var(--line);border-radius:6px;padding:5px 10px;font-size:13px;" oninput="filterTree()">
+  <button onclick="setAll(true)">全部展开</button>
+  <button onclick="setAll(false)">全部收起</button>
+</header>
+<main>
+<ul class="tree">
+<li><details open><summary>RSI 是什么</summary>
+<ul>
+<li class="leaf">定义：AI 自己改进自己、自己训练自己、自己给自己定目标（你所述）</li>
+<li class="leaf">争议：有人认为是&quot;伪概念&quot;，但它在 AI 领域处于中间态、有自己的作用（你所述）</li>
+<li class="leaf">相关：持续学习是其一种表现形式（你所述）</li></ul>
+</details></li>
+<li><details open><summary>核心困境：有界闭环</summary>
+<ul>
+<li class="leaf">限制一：改进目标由人工设计</li>
+<li class="leaf">限制二：评价依赖人工标注</li>
+<li class="leaf">限制三：奖励黑客——AI 自我评估也会钻空子</li>
+<li class="leaf">三难困境：无法区分&quot;真改进&quot;与&quot;自认为改进&quot;</li></ul>
+</details></li>
+<li><details open><summary>递归增益：如何点火</summary>
+<ul>
+<li class="leaf">0 到 1 很难，1 做好之后指数飞升（你所述）</li>
+<li class="leaf">类比：点火——点火难，点着后燃料充分（你所述）</li>
+<li class="leaf">正反馈：更强 → 更快自我迭代 → 更快改进，复利效应（归纳）</li></ul>
+</details></li>
+<li><details open><summary>发展脉络</summary>
+<ul>
+<li><details open><summary>1980s-2017：启发式规则 + 强化学习</summary>
+<ul>
+<li class="leaf">对规则打分给奖励</li>
+<li class="leaf">弊端：奖励黑客，钻评估机制空子、能力没真提升</li></ul>
+</details></li>
+<li><details open><summary>AlphaZero：自博弈</summary>
+<ul>
+<li class="leaf">启发式规则 → 模型权重</li>
+<li class="leaf">自己生成数据训练自己</li>
+<li class="leaf">局限：目标受限，仅限具体场景</li></ul>
+</details></li>
+<li><details open><summary>LLM 时代：语言反馈</summary>
+<ul>
+<li class="leaf">大模型能评判好坏，替代人工指导</li>
+<li class="leaf">Reflexion（2023）：错题本式反思，失败后总结复用</li></ul>
+</details></li>
+<li><details open><summary>内部化学习（2022-2024）</summary>
+<ul>
+<li class="leaf">STaR：自举推理，保留正确推理过程微调自己</li>
+<li class="leaf">解法：逆向推理，先扶后放（像教骑车）</li>
+<li class="leaf">局限：目标仍需人工设计（如 DPO 需人类示范）</li></ul>
+</details></li>
+<li><details open><summary>评价体系演进（2022-2025）</summary>
+<ul>
+<li class="leaf">RLAIF：AI 对照人工写的原则打分</li>
+<li class="leaf">Self-Rewarding（2024）：回答 + 自我评分，交叉验证</li>
+<li class="leaf">Meta-Rewarding（2024）：评委的评委</li>
+<li class="leaf">隐患：评判尺度自我弯曲、陷入自我确认</li></ul>
+</details></li>
+<li><details open><summary>Agentic 时代：agent 迭代阶梯</summary>
+<ul>
+<li class="leaf">改提示词（AB 测试、版本管理）</li>
+<li class="leaf">改上下文（自我决策调研什么、组织什么）</li>
+<li class="leaf">改工作流（构造与编排流程）</li>
+<li class="leaf">改执行代码（agent 架构）</li>
+<li class="leaf">改优化器（改&quot;怎么改&quot;本身）</li>
+<li class="leaf">实例：提示词自优化（orbo 类）、工作流搜索（ADS-Flow 2025）、自我改进系统（DGM）、真实环境闭环（Melo 类）</li></ul>
+</details></li>
+<li><details open><summary>真实环境闭环：用户驱动</summary>
+<ul>
+<li class="leaf">从题库驱动 → 用户驱动</li>
+<li class="leaf">复盘执行记录，自我搜索、自我评估、自我接纳新版本</li>
+<li class="leaf">用户具体情况成为奖励信号，越真实越难钻空子</li></ul>
+</details></li>
+<li><details open><summary>更开放的自由度</summary>
+<ul>
+<li class="leaf">Self-Adapting LM：自己定学习计划、准备材料</li>
+<li class="leaf">MOTO：机器人策略自选动作（世界模型预测 + 价值模型判断）</li>
+<li class="leaf">AI 参与模型研发（OpenAI / Google / Anthropic）</li></ul>
+</details></li>
+<li><details open><summary>远方：套娃</summary>
+<ul>
+<li class="leaf">自动研究系统去研究并改进自动研究系统</li>
+<li class="leaf">递归式 agent 改进，评委的评委的评委</li></ul>
+</details></li></ul>
+</details></li>
+<li><details open><summary>未点火的核心问题</summary>
+<ul>
+<li class="leaf">验证器是否可靠</li>
+<li class="leaf">奖励黑客能否被避免</li>
+<li class="leaf">改进能否跨越数据分布界限</li>
+<li class="leaf">能力、控制、复杂度同步上升</li>
+<li class="leaf">终极之问：真变好了，还是学会了&quot;看起来变好&quot;？</li></ul>
+</details></li>
+<li><details open><summary>扩展</summary>
+<ul>
+<li class="leaf">概念澄清：RSI 与 AI 对齐、Goodhart 定律、智能爆炸</li>
+<li class="leaf">监管视角：稳健、可控、可审计、可回溯、能力评测</li>
+<li class="leaf">延伸学习：对齐问题、可解释性、Agent 评估</li></ul>
+</details></li>
+</ul>
+</main>
+<footer>由 feynman-learning-organizer 生成 · 思维导图</footer>
+<script>
+function setAll(open) {
+  document.querySelectorAll("details").forEach(d => {
+    if (open) d.setAttribute("open", "");
+    else d.removeAttribute("open");
+  });
+}
+function filterTree() {
+  var q = document.getElementById("q").value.trim().toLowerCase();
+  var lis = document.querySelectorAll("ul.tree li");
+  lis.forEach(function(li) {
+    var hit = li.textContent.toLowerCase().indexOf(q) !== -1;
+    li.style.display = q === "" || hit ? "" : "none";
+  });
+}
+</script>
+</body>
+</html>
