@@ -178,6 +178,11 @@ kramdown:
       line_numbers: true
       start_line: 1
 
+# Mermaid 图表渲染
+# Chirpy 原生支持 mermaid，无需在此配置
+# 在文章 frontmatter 加 `mermaid: true` 即可启用该文的 mermaid 渲染
+# 正文用 ```mermaid 代码块即可画流程图、时序图、思维导图等
+
 collections:
   tabs:
     output: true
