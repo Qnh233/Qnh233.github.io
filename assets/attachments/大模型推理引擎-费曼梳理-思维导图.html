@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>大模型推理引擎：AI 工程师视角的一次费曼式梳理</title>
+<style>
+:root {
+  --bg: #f7f8fa; --card: #ffffff; --ink: #1f2329; --muted: #6b7280;
+  --accent: #2563eb; --line: #e5e7eb; --chip: #eef2ff;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
+  line-height: 1.6;
+}
+header {
+  position: sticky; top: 0; z-index: 10; background: var(--card);
+  border-bottom: 1px solid var(--line); padding: 12px 24px;
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+header h1 { font-size: 18px; margin: 0; flex: 1 1 auto; }
+header .count { color: var(--muted); font-size: 13px; }
+header button {
+  border: 1px solid var(--line); background: var(--card); color: var(--ink);
+  border-radius: 6px; padding: 5px 12px; cursor: pointer; font-size: 13px;
+}
+header button:hover { background: var(--chip); }
+main { max-width: 1080px; margin: 0 auto; padding: 28px 24px 64px; }
+ul.tree, ul.tree ul { list-style: none; margin: 0; padding-left: 22px; }
+ul.tree { padding-left: 0; }
+ul.tree > li { position: relative; }
+ul.tree li {
+  margin: 4px 0; padding: 5px 12px 5px 16px;
+  border-left: 2px solid var(--line); border-radius: 0 8px 8px 0;
+  background: var(--card); transition: background .15s, border-color .15s;
+}
+ul.tree li:hover { background: var(--chip); border-left-color: var(--accent); }
+ul.tree li.leaf { cursor: default; }
+details summary {
+  cursor: pointer; font-weight: 600; color: var(--ink);
+  list-style: none; display: inline-block;
+}
+details summary::-webkit-details-marker { display: none; }
+details summary::before { content: "▾ "; color: var(--accent); }
+details:not([open]) summary::before { content: "▸ "; }
+details ul { margin-top: 6px; }
+code { background: #f0f1f3; border-radius: 4px; padding: 1px 5px; font-size: 90%; }
+strong { color: var(--accent); }
+footer { text-align: center; color: var(--muted); font-size: 12px; padding: 16px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🧠 大模型推理引擎：AI 工程师视角的一次费曼式梳理</h1>
+  <span class="count">124 个节点</span>
+  <input id="q" type="search" placeholder="搜索节点…" style="border:1px solid var(--line);border-radius:6px;padding:5px 10px;font-size:13px;" oninput="filterTree()">
+  <button onclick="setAll(true)">全部展开</button>
+  <button onclick="setAll(false)">全部收起</button>
+</header>
+<main>
+<ul class="tree">
+<li><details open><summary>AI 工程师的算法层地图</summary>
+<ul>
+<li><details open><summary>算法工程师（做过算法的）</summary>
+<ul>
+<li class="leaf">覆盖：预训练 → 后训练 → 推理优化</li>
+<li class="leaf">角色：算子工程师 / 推理优化工程师 / 模型算法工程师</li></ul>
+</details></li>
+<li><details open><summary>AI 应用工程师</summary>
+<ul>
+<li class="leaf">先推理出模型</li>
+<li class="leaf">再基于推理搭建 AI 应用</li></ul>
+</details></li>
+<li><details open><summary>FDE 前沿部署工程师</summary>
+<ul>
+<li class="leaf">核心：翻译业务需求、定位缺口、走真实流程、找增量点</li>
+<li class="leaf">节奏：小范围验证 → 大规模推广 → 数据飞轮迭代</li></ul>
+</details></li></ul>
+</details></li>
+<li><details open><summary>为什么关注推理引擎：推理阶段四大挑战</summary>
+<ul>
+<li><details open><summary>显存瓶颈</summary>
+<ul>
+<li class="leaf">模型参数大 → 显存占用高</li>
+<li class="leaf">留给输入 embedding / token 的空间少</li></ul>
+</details></li>
+<li><details open><summary>吞吐与延迟的矛盾</summary>
+<ul>
+<li class="leaf">高并发下响应速度难兼得</li>
+<li class="leaf">削峰填谷仍要排队，关注 tradeoff</li></ul>
+</details></li>
+<li><details open><summary>成本压力</summary>
+<ul>
+<li class="leaf">算力昂贵、利用率低</li>
+<li class="leaf">核心问题：如何提高利用率</li></ul>
+</details></li>
+<li><details open><summary>碎片化与空闲</summary>
+<ul>
+<li class="leaf">显存碎片化</li>
+<li class="leaf">GPU 利用率不拉满、存在空闲阶段</li></ul>
+</details></li></ul>
+</details></li>
+<li><details open><summary>推理引擎全景</summary>
+<ul>
+<li><details open><summary>三大主流</summary>
+<ul>
+<li class="leaf">vLLM：生态最广的先行者</li>
+<li class="leaf">SGLang：前缀复用的极致派</li>
+<li class="leaf">TensorRT-LLM：英伟达上的榨干派</li></ul>
+</details></li>
+<li><details open><summary>轻量通用</summary>
+<ul>
+<li class="leaf">ONNX Runtime 等</li></ul>
+</details></li>
+<li><details open><summary>统一理解框架</summary>
+<ul>
+<li class="leaf">what：它是什么</li>
+<li class="leaf">why：为什么出现、解决什么问题</li>
+<li class="leaf">how：它是怎么做的</li>
+<li class="leaf">where：什么场景用</li>
+<li class="leaf">选型理由与彼此区别</li></ul>
+</details></li></ul>
+</details></li>
+<li><details open><summary>通用底盘：prefill + decode 与 KV Cache</summary>
+<ul>
+<li><details open><summary>推理两阶段</summary>
+<ul>
+<li class="leaf">prefill：处理所有输入 token</li>
+<li class="leaf">decode：自回归逐个生成新 token</li></ul>
+</details></li>
+<li><details open><summary>KV Cache：缓存历史的 K/V</summary>
+<ul>
+<li class="leaf">本质：每个 token 与前面所有 token 做 QKV 交互</li>
+<li class="leaf">前缀（如 system prompt）每次都一样 → 重复计算浪费</li>
+<li class="leaf">解法：把算过的 K/V 存起来，命中直接取用</li>
+<li class="leaf">未命中的 K/V 仍需重新计算</li></ul>
+</details></li>
+<li><details open><summary>固定长度缓存的老问题</summary>
+<ul>
+<li class="leaf">预设过短 → 缓存不够用、命中率低、频繁交换</li>
+<li class="leaf">预设过长 → 内部碎片；与 batch 不成比例 → 外部碎片</li>
+<li class="leaf">本质：物理地址过于连续（数组 → 链表类比）</li></ul>
+</details></li>
+<li><details open><summary>碎片规律</summary>
+<ul>
+<li class="leaf">高并发 + 短序列 → 内部碎片多</li>
+<li class="leaf">低并发 + 长序列 → 内部碎片低</li></ul>
+</details></li></ul>
+</details></li>
+<li><details open><summary>vLLM：生态最广的先行者</summary>
+<ul>
+<li><details open><summary>核心技术一：PagedAttention</summary>
+<ul>
+<li class="leaf">仿操作系统虚拟页管理（虚拟内存机制）</li>
+<li class="leaf">逻辑页 → 动态物理地址，无需预分配连续地址</li>
+<li class="leaf">效果：消除显存碎片、提高显存利用率、吞吐上升</li></ul>
+</details></li>
+<li><details open><summary>核心技术二：Continuous Batching</summary>
+<ul>
+<li class="leaf">动态批处理，token 逐个流出（流式）</li>
+<li class="leaf">不用等整个 batch 结束，GPU 不空等</li>
+<li class="leaf">提高并发，实现请求的连续调度</li></ul>
+</details></li>
+<li><details open><summary>实现细节</summary>
+<ul>
+<li class="leaf">KV cache 切分成固定 block，存于不同页</li>
+<li class="leaf">memory management：请求真正生成 token 时才分配新 block</li>
+<li class="leaf">调度器：每个迭代重新评估哪些请求进入 batch</li>
+<li class="leaf">贪心策略保证已生成 token 立即入队</li>
+<li class="leaf">完成即移除、新请求下一迭代补位，GPU 持续高负载</li></ul>
+</details></li>
+<li><details open><summary>三大指标</summary>
+<ul>
+<li class="leaf">吞吐量：每秒输出 token 数</li>
+<li class="leaf">TTFT：首 token 延迟</li>
+<li class="leaf">TPOT：每 token 延迟</li></ul>
+</details></li>
+<li><details open><summary>特点</summary>
+<ul>
+<li class="leaf">出现早、社区生态好</li>
+<li class="leaf">兼容 OpenAI API，迁移可复用原有流程</li></ul>
+</details></li></ul>
+</details></li>
+<li><details open><summary>SGLang：前缀复用的极致派</summary>
+<ul>
+<li><details open><summary>核心一：RadixAttention</summary>
+<ul>
+<li class="leaf">名字像 radix tree（前缀树），用树结构存前缀缓存</li>
+<li class="leaf">实现前缀 KV cache 的高效复用</li></ul>
+</details></li>
+<li><details open><summary>核心二：DSL</summary>
+<ul>
+<li class="leaf">以代码形式描述生成流程</li></ul>
+</details></li>
+<li><details open><summary>擅长场景</summary>
+<ul>
+<li class="leaf">多轮对话（system prompt 相同）</li>
+<li class="leaf">编码（文件前缀相似）</li>
+<li class="leaf">Agent 工具调用（原生支持结构化输出）</li>
+<li class="leaf">复杂程序调度</li></ul>
+</details></li>
+<li><details open><summary>与 vLLM 的分水岭</summary>
+<ul>
+<li class="leaf">前缀重复度越高，优势越大</li>
+<li class="leaf">前缀重叠低时，两者吞吐相当</li></ul>
+</details></li></ul>
+</details></li>
+<li><details open><summary>TensorRT-LLM：英伟达上的榨干派</summary>
+<ul>
+<li><details open><summary>编译期优化</summary>
+<ul>
+<li class="leaf">AOT：编译时优化</li>
+<li class="leaf">深度绑定英伟达 GPU</li></ul>
+</details></li>
+<li><details open><summary>算子级融合</summary>
+<ul>
+<li class="leaf">卷积 / attention / transformer 算子合并加速</li>
+<li class="leaf">榨干 GPU 性能</li></ul>
+</details></li>
+<li><details open><summary>适用</summary>
+<ul>
+<li class="leaf">英伟达卡 + 追求极致性能</li></ul>
+</details></li></ul>
+</details></li>
+<li><details open><summary>ONNX Runtime：通用派</summary>
+<ul>
+<li class="leaf">跨平台：CPU / GPU / NPU</li>
+<li class="leaf">跨模型：非大模型场景也覆盖</li>
+<li class="leaf">运行时图优化</li>
+<li class="leaf">适用：边缘设备、多模型混合部署</li></ul>
+</details></li>
+<li><details open><summary>选型决策</summary>
+<ul>
+<li><details open><summary>四维判断</summary>
+<ul>
+<li class="leaf">场景 × 硬件 × 生态 × 团队能力</li></ul>
+</details></li>
+<li><details open><summary>结论</summary>
+<ul>
+<li class="leaf">通用高吞吐、上手快、要生态 → vLLM</li>
+<li class="leaf">复杂程序 / Agent / 高前缀复用 → SGLang</li>
+<li class="leaf">极致性能 + 英伟达硬件 → TensorRT-LLM</li>
+<li class="leaf">通用多模型 / CPU / 边缘 → ONNX Runtime</li></ul>
+</details></li></ul>
+</details></li>
+<li><details open><summary>前沿快讯〔扩展〕</summary>
+<ul>
+<li class="leaf">Prefix Caching v2：自动识别共享前缀，命中率提升 45%</li>
+<li class="leaf">Chunked Prefill：预填充与解码交错，减少解码阻塞</li>
+<li class="leaf">Multi-LoRA Serving：动态加载多个 LoRA 适配器</li>
+<li class="leaf">RadixAttention：多请求共享前缀，多轮吞吐提升 3~5 倍</li></ul>
+</details></li>
+<li><details open><summary>工程师分工与存疑点</summary>
+<ul>
+<li><details open><summary>分工</summary>
+<ul>
+<li class="leaf">推理引擎工程师：面向内部模型迭代 / 对外推理服务</li>
+<li class="leaf">FDE / 部署工程师：会用引擎、能部署即可</li></ul>
+</details></li>
+<li><details open><summary>存疑点</summary>
+<ul>
+<li class="leaf">&quot;joineoff&quot; 应指 tradeoff（吞吐-延迟权衡）</li>
+<li class="leaf">&quot;伽马策略&quot; 应为贪心策略（greedy）</li>
+<li class="leaf">语音转写名词已按标准术语还原</li></ul>
+</details></li></ul>
+</details></li>
+</ul>
+</main>
+<footer>由 feynman-learning-organizer 生成 · 思维导图</footer>
+<script>
+function setAll(open) {
+  document.querySelectorAll("details").forEach(d => {
+    if (open) d.setAttribute("open", "");
+    else d.removeAttribute("open");
+  });
+}
+function filterTree() {
+  var q = document.getElementById("q").value.trim().toLowerCase();
+  var lis = document.querySelectorAll("ul.tree li");
+  lis.forEach(function(li) {
+    var hit = li.textContent.toLowerCase().indexOf(q) !== -1;
+    li.style.display = q === "" || hit ? "" : "none";
+  });
+}
+</script>
+</body>
+</html>
