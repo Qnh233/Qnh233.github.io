@@ -241,8 +241,7 @@
       "templater-obsidian:Templater": false,
       "terminal:Open terminal": false,
       "realtime-transcription:实时语音转写": false,
-      "gantt-calendar:甘特日历": false,
-      "periodic-notes:Open today": false
+      "gantt-calendar:甘特日历": false
     }
   },
   "active": "ccc1d271a84c0c54",
