@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/📚 概念学习・Pi Agent 架构全景.md",
+                "file": "_posts/2026-09-20-大模型推理引擎怎么选.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "📚 概念学习・Pi Agent 架构全景"
+              "title": "2026-09-20-大模型推理引擎怎么选"
             }
           }
         ]
@@ -245,11 +245,11 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "693947286ded0257",
+  "active": "9d8adb612970c5f6",
   "lastOpenFiles": [
+    "_posts/📚 概念学习・Pi Agent 架构全景.md",
     "2026-09-28.md",
     "2026-09-14.md",
-    "_posts/📚 概念学习・Pi Agent 架构全景.md",
     "_posts/多智能体实践.md",
     "_posts/FastAPI 应用解析.md",
     "_posts/2026-09-19-递归自我改进RSI-AI真的能自己教自己吗.md",
