@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>📅 今日复盘 · 2026-10-02 周五</title>
+<style>
+:root {
+  --bg: #f7f8fa; --card: #ffffff; --ink: #1f2329; --muted: #6b7280;
+  --accent: #2563eb; --line: #e5e7eb; --chip: #eef2ff;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
+  line-height: 1.6;
+}
+header {
+  position: sticky; top: 0; z-index: 10; background: var(--card);
+  border-bottom: 1px solid var(--line); padding: 12px 24px;
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+header h1 { font-size: 18px; margin: 0; flex: 1 1 auto; }
+header .count { color: var(--muted); font-size: 13px; }
+header button {
+  border: 1px solid var(--line); background: var(--card); color: var(--ink);
+  border-radius: 6px; padding: 5px 12px; cursor: pointer; font-size: 13px;
+}
+header button:hover { background: var(--chip); }
+main { max-width: 1080px; margin: 0 auto; padding: 28px 24px 64px; }
+ul.tree, ul.tree ul { list-style: none; margin: 0; padding-left: 22px; }
+ul.tree { padding-left: 0; }
+ul.tree > li { position: relative; }
+ul.tree li {
+  margin: 4px 0; padding: 5px 12px 5px 16px;
+  border-left: 2px solid var(--line); border-radius: 0 8px 8px 0;
+  background: var(--card); transition: background .15s, border-color .15s;
+}
+ul.tree li:hover { background: var(--chip); border-left-color: var(--accent); }
+ul.tree li.leaf { cursor: default; }
+details summary {
+  cursor: pointer; font-weight: 600; color: var(--ink);
+  list-style: none; display: inline-block;
+}
+details summary::-webkit-details-marker { display: none; }
+details summary::before { content: "▾ "; color: var(--accent); }
+details:not([open]) summary::before { content: "▸ "; }
+details ul { margin-top: 6px; }
+code { background: #f0f1f3; border-radius: 4px; padding: 1px 5px; font-size: 90%; }
+strong { color: var(--accent); }
+footer { text-align: center; color: var(--muted); font-size: 12px; padding: 16px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🧠 📅 今日复盘 · 2026-10-02 周五</h1>
+  <span class="count">82 个节点</span>
+  <input id="q" type="search" placeholder="搜索节点…" style="border:1px solid var(--line);border-radius:6px;padding:5px 10px;font-size:13px;" oninput="filterTree()">
+  <button onclick="setAll(true)">全部展开</button>
+  <button onclick="setAll(false)">全部收起</button>
+</header>
+<main>
+<ul class="tree">
+<li><details open><summary>今日概览</summary>
+<ul>
+<li class="leaf">收到经纬恒润拒信</li>
+<li class="leaf">复盘面试考察内容</li>
+<li class="leaf">借案例思考职业路径</li>
+<li class="leaf">开源 PR 返回待调整</li>
+<li class="leaf">状态：迷茫但积极复盘</li></ul>
+</details></li>
+<li><details open><summary>经纬恒润面试复盘</summary>
+<ul>
+<li><details open><summary>面试基本情况</summary>
+<ul>
+<li class="leaf">9.29（周二）14:00 开面，时长 1 小时</li>
+<li class="leaf">自我感觉良好，面试官似发意向</li>
+<li class="leaf">三四天后收到拒信</li></ul>
+</details></li>
+<li><details open><summary>被拒原因推测</summary>
+<ul>
+<li class="leaf">简历项目不够算法</li>
+<li class="leaf">高考分数不高</li>
+<li class="leaf">本硕学校背景一般</li></ul>
+</details></li>
+<li><details open><summary>公司认知</summary>
+<ul>
+<li class="leaf">疑似外包性质</li>
+<li class="leaf">拿钱换命、拿命换钱</li>
+<li class="leaf">有总比没有好，先赚了再说</li></ul>
+</details></li>
+<li><details open><summary>考察内容</summary>
+<ul>
+<li class="leaf">项目：工程落地 / 指标涨幅 / 真实性核验</li>
+<li class="leaf">八股：Dict 与 Map 底层 / Spring / 线程进程 / 蒸馏剪枝量化 / 混合精度 / train-eval 模式 / 过拟合</li>
+<li class="leaf">非技术：高考分数、四六级</li></ul>
+</details></li>
+<li><details open><summary>后续调整</summary>
+<ul>
+<li class="leaf">投算法岗换新简历</li>
+<li class="leaf">逐项复盘项目细节</li>
+<li class="leaf">系统复习八股</li>
+<li class="leaf">优先拿到 offer</li></ul>
+</details></li></ul>
+</details></li>
+<li><details open><summary>开源项目 PR</summary>
+<ul>
+<li class="leaf">参与热门开源项目</li>
+<li class="leaf">测试部分出错待调整</li>
+<li class="leaf">最近比较有成就感</li></ul>
+</details></li>
+<li><details open><summary>思考与感悟</summary>
+<ul>
+<li><details open><summary>案例：美术转 TA</summary>
+<ul>
+<li class="leaf">包头师范美术出身</li>
+<li class="leaf">抑制编程冲动深耕美术</li>
+<li class="leaf">成都小厂 9 年 → 大厂主美 → 转策划失败 → TA</li>
+<li class="leaf">年薪百万 / 全款房 / 40 多岁辞职</li>
+<li class="leaf">自嘲：预想如彭于晏，实际没有</li></ul>
+</details></li>
+<li><details open><summary>思维模型一：决策树</summary>
+<ul>
+<li class="leaf">二叉树拆解，逐点 Yes/No</li>
+<li class="leaf">按优先级分配有限精力</li>
+<li class="leaf">化繁为简，简化再简化</li>
+<li class="leaf">畏难情绪（自己能解答自己）</li>
+<li class="leaf">后悔没用，错误的乐观优于正确的悲观</li>
+<li class="leaf">实践少，易受旁人动摇</li></ul>
+</details></li>
+<li><details open><summary>思维模型二：信息筛选</summary>
+<ul>
+<li class="leaf">判断信息真伪</li>
+<li class="leaf">判断与自身关联度</li>
+<li class="leaf">不盲追热点、不散播焦虑</li></ul>
+</details></li>
+<li><details open><summary>AI 时代生存</summary>
+<ul>
+<li class="leaf">执行层易被 AI 替代</li>
+<li class="leaf">向需求提出 / 架构设计升级</li>
+<li class="leaf">懂 AI 也要懂业务，做桥梁</li>
+<li class="leaf">20% 用 AI / 10% 落地 / 5% 创业</li></ul>
+</details></li>
+<li><details open><summary>确定性与收益</summary>
+<ul>
+<li class="leaf">体制 / 国央企 / 银行：收益确定上限低</li>
+<li class="leaf">高收益需拥抱不确定性</li>
+<li class="leaf">第一桶金要么不体面要么不干净</li>
+<li class="leaf">求稳可能丧失可能性</li>
+<li class="leaf">打工思维无法财务自由</li></ul>
+</details></li></ul>
+</details></li>
+<li><details open><summary>反思复盘（KPT）</summary>
+<ul>
+<li><details open><summary>Keep</summary>
+<ul>
+<li class="leaf">面试发挥好</li>
+<li class="leaf">开源项目成就感</li>
+<li class="leaf">有自己的拆解逻辑</li></ul>
+</details></li>
+<li><details open><summary>Problem</summary>
+<ul>
+<li class="leaf">简历匹配度不足</li>
+<li class="leaf">八股不牢固</li>
+<li class="leaf">思维模型实践少</li>
+<li class="leaf">畏难情绪</li>
+<li class="leaf">过度追求确定性</li></ul>
+</details></li>
+<li><details open><summary>Try</summary>
+<ul>
+<li class="leaf">换算法简历</li>
+<li class="leaf">系统复习八股</li>
+<li class="leaf">多实践决策模型</li>
+<li class="leaf">扭转求稳认知</li></ul>
+</details></li></ul>
+</details></li>
+<li><details open><summary>后续计划</summary>
+<ul>
+<li class="leaf">调整开源 PR 测试</li>
+<li class="leaf">简历 + 八股准备</li>
+<li class="leaf">优先拿到 offer 积累经验</li></ul>
+</details></li>
+</ul>
+</main>
+<footer>由 daily-dictation-organizer 生成 · 思维导图</footer>
+<script>
+function setAll(open) {
+  document.querySelectorAll("details").forEach(d => {
+    if (open) d.setAttribute("open", "");
+    else d.removeAttribute("open");
+  });
+}
+function filterTree() {
+  var q = document.getElementById("q").value.trim().toLowerCase();
+  var lis = document.querySelectorAll("ul.tree li");
+  lis.forEach(function(li) {
+    var hit = li.textContent.toLowerCase().indexOf(q) !== -1;
+    li.style.display = q === "" || hit ? "" : "none";
+  });
+}
+</script>
+</body>
+</html>
