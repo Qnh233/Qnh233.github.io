@@ -4,24 +4,37 @@
     "type": "split",
     "children": [
       {
-        "id": "54cfc38c7cfb6b21",
+        "id": "15e33158646d1df7",
         "type": "tabs",
         "children": [
           {
-            "id": "9d8adb612970c5f6",
+            "id": "ceee37190ce8fe76",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/note/day/2026-10-02.md",
+                "file": "_posts/未命名.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-10-02"
+              "title": "未命名"
+            }
+          },
+          {
+            "id": "776e19a1100e29a5",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.14.4"
+              },
+              "icon": "lucide-book-up",
+              "title": "版本说明 1.14.4"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -245,11 +258,12 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "9d8adb612970c5f6",
+  "active": "776e19a1100e29a5",
   "lastOpenFiles": [
+    "_posts/未命名.md",
+    "_posts/note/day/2026-10-02.md",
     "assets/attachments/今日复盘-思维导图-2026-10-02.html",
     "_posts/note/day/2026-09-13.md",
-    "_posts/note/day/2026-10-02.md",
     "2026-10-02.md",
     "_posts/note/day/2026-09-09.md",
     "_posts/2026-09-20-大模型推理引擎怎么选.md",
@@ -291,7 +305,6 @@
     "skills/mermaid-visualizer",
     "skills/excalidraw-diagram",
     "skills/obsidian-bases",
-    "skills/json-canvas",
-    "skills/obsidian-markdown"
+    "skills/json-canvas"
   ]
 }
