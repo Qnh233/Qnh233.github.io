@@ -18,16 +18,16 @@ mermaid: true
 - ① 视觉观察：渲染图像直接感知（非文本网格）
 - ② 无损视觉记忆：每一帧全分辨率保存，按回合 / 帧索引，在上下文之外
 - ③ 视觉检查：空间放大任意区域 / 时间回溯任意帧 / `read_pixels` 读像素
-![Figure 3：VISTA 三大组件与每轮流水线](assets/fig_designs.png)
+![Figure 3：VISTA 三大组件与每轮流水线](/assets/img/posts/vista-fig3-designs.png)
 
 **图 1 ｜ 论文 Figure 3：**VISTA 的关键设计。(a) 视觉观察：64×64 文本网格渲染成图像；(b) 无损记忆：环境返回的每一帧以全分辨率保存并按索引寻址；(c) 视觉检查：空间上任意区域放大、时间上任意早期帧回溯；(d) 每轮流水线：Observe → Reason → Act，`play` 是唯一消耗动作数的步骤。来源：arXiv:2610.02200
 
 **二、为什么（Why）**—— 解决 "编码时不知道哪块信息以后有用"：语言路线（文本网格～4000 token / 帧 + 程序合成）和传统多模态（一次编码、有损、满了就丢）都被绕开。
-![](../assets/attachments/Pasted%20image%2020261029155806.png)
+![](/assets/attachments/Pasted%20image%2020261029155806.png)
 **图 2 ｜ 论文 Figure 6：**同一种状态分别表示为文本网格（左，约 4,000 token/帧）与 2D 图像（右，约 308 token/帧）。图像表示性能相当（RHAE 96.75 vs 99.00）却动作更少、每游戏 token 从 71.9M 降到 30.7M。来源：arXiv:2610.02200
 
 **三、怎么用（How）**——Observe → Reason → Act 流水线，`play` 是唯一计费动作；上下文只放当前帧，历史全在外部存档。
-![](../assets/attachments/Pasted%20image%2020261029155859.png)
+![](/assets/attachments/Pasted%20image%2020261029155859.png)
 **图 3 ｜ 论文 Figure 2：**VISTA 在 ARC-AGI-3（左）与 GameWorld（右）的真实轨迹——观察、推理、检查、行动交错进行。左：agent 发现橙色方块点击后变 X 标记，立即 `inspect` 放大区域确认细节并更新 GUIDE 笔记；右：Fireboy 跳空化成灰烟，agent 放大落点区域复盘死局。来源：arXiv:2610.02200
 
 
