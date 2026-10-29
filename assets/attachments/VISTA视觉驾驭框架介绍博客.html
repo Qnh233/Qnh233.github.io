@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VISTA：给多模态模型一双"会回看"的眼睛</title>
+<style>
+  :root {
+    --ink: #1f2937; --muted: #6b7280; --line: #e5e7eb;
+    --blue: #0f4c81; --blue-soft: #eaf4ff;
+    --green: #1e8449; --green-soft: #eafaf1;
+    --orange: #b45f06; --orange-soft: #fdf2e9;
+    --bg: #f7f8fa; --card: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
+    line-height: 1.75; font-size: 15px;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px 80px; }
+  .hero {
+    background: linear-gradient(135deg, #0f4c81 0%, #1e6bb0 60%, #2e86de 100%);
+    color: #fff; border-radius: 0 0 18px 18px; padding: 46px 34px 38px; margin: 0 -20px 32px;
+  }
+  .hero .tag { display: inline-block; font-size: 12px; letter-spacing: 2px; background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.35); border-radius: 999px; padding: 3px 14px; margin-bottom: 14px; }
+  .hero h1 { font-size: 30px; line-height: 1.35; margin: 0 0 12px; font-weight: 800; }
+  .hero .sub { font-size: 15px; opacity: .92; margin: 0; }
+  .hero .meta { font-size: 12.5px; opacity: .75; margin-top: 16px; border-top: 1px solid rgba(255,255,255,.25); padding-top: 12px; }
+  h2 {
+    font-size: 21px; margin: 44px 0 14px; padding-left: 12px;
+    border-left: 4px solid var(--blue); line-height: 1.4;
+  }
+  h3 { font-size: 16.5px; margin: 26px 0 8px; color: var(--blue); }
+  p { margin: 10px 0; }
+  .lead { font-size: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin: 18px 0; }
+  .lead b { color: var(--blue); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; margin: 12px 0; }
+  .grid3 { display: flex; flex-wrap: wrap; gap: 12px; margin: 14px 0; }
+  .grid3 > div { flex: 1; min-width: 220px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+  .grid3 .c-blue { border-top: 3px solid #2e86de; } .grid3 .c-green { border-top: 3px solid #27ae60; } .grid3 .c-orange { border-top: 3px solid #e67e22; }
+  .grid3 h4 { margin: 0 0 6px; font-size: 15px; }
+  .grid3 .c-blue h4 { color: var(--blue); } .grid3 .c-green h4 { color: var(--green); } .grid3 .c-orange h4 { color: var(--orange); }
+  .grid3 p { font-size: 13.5px; margin: 0; color: #374151; }
+  figure { margin: 22px 0; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+  figure img { width: 100%; height: auto; display: block; border-radius: 8px; background: #fff; }
+  figcaption { font-size: 12.5px; color: var(--muted); margin-top: 8px; text-align: center; line-height: 1.6; }
+  figcaption .src { color: #9aa4b2; }
+  table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13.5px; background: var(--card); }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: #f1f5f9; font-weight: 600; }
+  .flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch; margin: 14px 0; }
+  .flow .step { flex: 1; min-width: 150px; border-radius: 10px; padding: 10px 12px; font-size: 13.5px; }
+  .flow .s1 { background: var(--blue-soft); border-left: 3px solid #2e86de; }
+  .flow .s2 { background: var(--orange-soft); border-left: 3px solid #e67e22; }
+  .flow .s3 { background: var(--green-soft); border-left: 3px solid #27ae60; }
+  .flow .arrow { display: flex; align-items: center; font-size: 17px; color: #8e44ad; }
+  .pill { display: inline-block; background: #eef2ff; color: #3730a3; border-radius: 6px; padding: 1px 8px; font-size: 12.5px; font-weight: 600; }
+  .quote { border-left: 4px solid var(--orange); background: var(--orange-soft); border-radius: 0 10px 10px 0; padding: 12px 16px; margin: 16px 0; font-size: 14.5px; }
+  .quote b { color: var(--orange); }
+  ul, ol { margin: 8px 0 8px 4px; padding-left: 22px; }
+  li { margin: 4px 0; }
+  code { background: #f0f1f3; border-radius: 4px; padding: 1px 6px; font-size: 90%; font-family: Consolas, "Courier New", monospace; }
+  .kpi { display: flex; flex-wrap: wrap; gap: 12px; margin: 16px 0; }
+  .kpi .box { flex: 1; min-width: 170px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; text-align: center; padding: 16px 10px; }
+  .kpi .num { font-size: 26px; font-weight: 800; color: var(--blue); }
+  .kpi .lbl { font-size: 12.5px; color: var(--muted); margin-top: 4px; }
+  .foot { text-align: center; color: var(--muted); font-size: 12.5px; margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--line); }
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 23px; }
+    .hero { padding: 32px 20px 28px; }
+    h2 { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <span class="tag">论文解读 · arXiv:2610.02200</span>
+    <h1>VISTA：给多模态模型一双"会回看"的眼睛</h1>
+    <p class="sub">从文本数字网格到无损视觉记忆——多模态 Agent 的一次"回归本真"</p>
+    <p class="meta">Qiushi Han · Keya Hu · Linlu Qiu · Cathy Wu · Kaiming He ｜ MIT ｜ 2026-10 ｜ 代码：github.com/joshhhhhan/VISTA</p>
+  </div>
+
+  <div class="lead">
+    <b>一句话总结：</b>多模态模型本身就"会推理"，缺的只是一个正确的<b>视觉驾驭框架（harness）</b>——给模型"原始视觉观察 + 无损视觉记忆 + 自主检查工具"，它就能在陌生交互环境里完成长程推理。VISTA 用这套极简设计在 ARC-AGI-3 上拿到<b>满分 RHAE 100.00</b>，且成为<b>首个不依赖程序合成</b>就达到满分/近满分的系统。
+  </div>
+
+  <h2>一、是什么（What）：一个"长程视觉"驾驭框架</h2>
+  <p>VISTA（<b>V</b>isual <b>H</b>arness for <b>R</b>easoning in an <b>I</b>nteractive <b>W</b>orld）不训练任何模型，它是一层接在通用多模态模型外面的纯机械接口，由三大组件构成：</p>
+
+  <div class="grid3">
+    <div class="c-blue">
+      <h4>① 视觉观察 Visual Observation</h4>
+      <p>环境以<b>渲染图像</b>直接输入（而非文本网格），保留物体的外观与空间关系，让模型充分发挥视觉先验。ARC 中 64×64 帧放大 8× 为 512×512 输入。</p>
+    </div>
+    <div class="c-green">
+      <h4>② 无损视觉记忆 Lossless Visual Memory</h4>
+      <p>环境返回的<b>每一帧（含中间动画帧）全分辨率保存</b>，按「回合 turn / 帧 frame」索引，存在上下文之外，永久可查、绝不压缩。</p>
+    </div>
+    <div class="c-orange">
+      <h4>③ 视觉检查 Visual Inspection</h4>
+      <p>模型<b>主动决定</b>查什么：空间上放大任意矩形区域、时间上回溯任意早期帧、<code>read_pixels</code> 精确读取像素数值。</p>
+    </div>
+  </div>
+
+  <figure>
+    <img src="assets/fig_designs.png" alt="Figure 3：VISTA 三大组件与每轮流水线">
+    <figcaption><b>图 1 ｜ 论文 Figure 3：</b>VISTA 的关键设计。(a) 视觉观察：64×64 文本网格渲染成图像；(b) 无损记忆：环境返回的每一帧以全分辨率保存并按索引寻址；(c) 视觉检查：空间上任意区域放大、时间上任意早期帧回溯；(d) 每轮流水线：Observe → Reason → Act，<code>play</code> 是唯一消耗动作数的步骤。<span class="src">来源：arXiv:2610.02200</span></figcaption>
+  </figure>
+
+  <h2>二、为什么（Why）：解决"编码时不知道哪块信息以后有用"</h2>
+  <p>ARC-AGI-3 是一组<b>规则和目标都不给</b>的交互式视觉游戏，agent 必须在陌生世界里通过试错发现规则、跨关卡迁移理解。此前主流做法有两条路线，各有硬伤：</p>
+  <div class="card">
+    <p><span class="pill">语言路线</span> 把 64×64 画面转写成<b>文本数字网格</b>（每格一个整数颜色索引），再靠 LLM 读网格、写程序验证（program synthesis）。<b>问题：</b>每帧约 4,000 token 极贵；转写丢失视觉细节；环境越复杂，显式程序化抽象越难。</p>
+    <p><span class="pill">传统多模态路线</span> 每张图只<b>编码一次</b>成视觉表征进入上下文。<b>问题：</b>表征是有损压缩；<b>编码时模型不知道哪些细节以后会关键</b>；上下文一满，旧帧被丢弃或被文本摘要替换——等模型知道要回看时，原图早就没了。</p>
+  </div>
+  <p><b>VISTA 的答案：</b>把"决定看什么"从<b>编码时刻</b>推迟到<b>推理时刻</b>。记忆全量被动保存（harness 机械行为，零上下文成本），注意力由模型主动调用（<code>inspect</code> 查哪帧、裁哪块、读哪些像素）——相当于给模型一个<b>覆盖整个交互历史的显式注意力机制</b>。</p>
+
+  <figure>
+    <img src="assets/fig_repr.png" alt="Figure 6：文本网格 vs 2D 图像">
+    <figcaption><b>图 2 ｜ 论文 Figure 6：</b>同一种状态分别表示为文本网格（左，约 4,000 token/帧）与 2D 图像（右，约 308 token/帧）。图像表示性能相当（RHAE 96.75 vs 99.00）却动作更少、每游戏 token 从 71.9M 降到 30.7M。<span class="src">来源：arXiv:2610.02200</span></figcaption>
+  </figure>
+
+  <h2>三、怎么用（How）：观察 → 推理 → 行动，按需回看</h2>
+  <p>每回合模型与 harness 多轮对话：接收当前视觉状态，自由语言推理（假设 → 预测动作结果 → 规划），可随时检查记忆与笔记，最后用 <code>play</code> 执行一个动作。上下文中只放"当前帧 + 临时检索结果"，历史全在外部存档——所以<b>记忆不会随上下文清空而丢失</b>。</p>
+
+  <div class="flow">
+    <div class="step s1"><b>1 观察 Observe</b><br>当前帧 + 可用动作列表</div>
+    <div class="arrow">→</div>
+    <div class="step s2"><b>2 推理 Reason</b><br>自由语言：假设·预测·规划<br>可选：inspect 记忆 / read_pixels / 读写笔记</div>
+    <div class="arrow">→</div>
+    <div class="step s3"><b>3 行动 Act</b><br>play 执行一个动作（唯一计费）<br>返回帧存入记忆，末帧成为下一轮观察</div>
+  </div>
+
+  <table>
+    <tr><th>工具</th><th>作用</th></tr>
+    <tr><td><code>play</code></td><td>执行一个游戏动作，唯一改变环境的工具</td></tr>
+    <tr><td><code>inspect</code></td><td>检索任意早期帧、裁剪任意区域并放大查看</td></tr>
+    <tr><td><code>read_pixels</code></td><td>读取选中区域的像素数值（精确数字证据）</td></tr>
+    <tr><td><code>history</code></td><td>回看此前动作与环境的精确记录</td></tr>
+    <tr><td><code>GUIDE.md / WORKING.md</code></td><td>持久记忆：跨关卡游戏规则 / 当前关卡草稿与交接摘要</td></tr>
+  </table>
+
+  <figure>
+    <img src="assets/fig_trace.png" alt="Figure 2：VISTA 真实轨迹">
+    <figcaption><b>图 3 ｜ 论文 Figure 2：</b>VISTA 在 ARC-AGI-3（左）与 GameWorld（右）的真实轨迹——观察、推理、检查、行动交错进行。左：agent 发现橙色方块点击后变 X 标记，立即 <code>inspect</code> 放大区域确认细节并更新 GUIDE 笔记；右：Fireboy 跳空化成灰烟，agent 放大落点区域复盘死局。<span class="src">来源：arXiv:2610.02200</span></figcaption>
+  </figure>
+
+  <h2>四、效果与对比（Diff）：满分 + 逐级消融</h2>
+  <div class="kpi">
+    <div class="box"><div class="num">100.00</div><div class="lbl">RHAE 满分（Claude Opus 5.0）</div></div>
+    <div class="box"><div class="num">25 / 25</div><div class="lbl">ARC-AGI-3 公开游戏全通</div></div>
+    <div class="box"><div class="num">-57.4%</div><div class="lbl">动作数 vs 人类首次玩家（7,302 vs 17,135）</div></div>
+    <div class="box"><div class="num">99.00</div><div class="lbl">GPT-5.6 Sol 成绩（max effort）</div></div>
+  </div>
+  <p>对比同期系统：Tycho（100.00）、Retrodict（99.86）、Schema（98.98）、ewma_sv（98.97）——<b>它们全部依赖程序合成</b>；VISTA 是唯一不写程序就拿到满分/近满分的系统，而官方无 harness 基线只有 40.68（Opus 5.0）和 13.33（GPT-5.6 Sol）。</p>
+
+  <p><b>消融实验</b>把各组件贡献拆得清清楚楚（GPT-5.6 Sol, max）：</p>
+  <table>
+    <tr><th>配置（逐步叠加）</th><th>RHAE</th><th>说明</th></tr>
+    <tr><td>官方实现（文本网格基线）</td><td>13.33</td><td>官方报告值</td></tr>
+    <tr><td>(i) 换用图像观察</td><td>47.32</td><td>单换输入就 +34 分，图像 token 便宜一个数量级</td></tr>
+    <tr><td>(ii) 放宽动作/时间限制</td><td>51.66</td><td>官方限制导致跑不完</td></tr>
+    <tr><td>(iii) 连续对话 + 原生压缩</td><td>65.82</td><td>历史不再被简单截断</td></tr>
+    <tr><td>(iv) 增加 GUIDE/WORKING 笔记</td><td>70.05</td><td>跨上下文携带理解</td></tr>
+    <tr><td>(v) + 无损视觉记忆与检查</td><td>94.10</td><td><b>最大飞跃 +24 分</b>：VISTA 招牌组件</td></tr>
+    <tr><td>(vi) + read_pixels 精确像素读取</td><td>99.00</td><td>完整 VISTA</td></tr>
+  </table>
+
+  <figure>
+    <img src="assets/fig_memory.png" alt="Figure 10：无损记忆的两种重注意力">
+    <figcaption><b>图 4 ｜ 论文 Figure 10：</b>无损记忆的两种"重注意力"。(a) 跨时空：棋盘重置后，agent 一次 <code>inspect</code> 从 22 回合前取回 4 帧重建地图；(b) 局部细节：把 3 个小方块放大约 13×，确认紫色标记朝向，从而推断守卫的致命方向。<span class="src">来源：arXiv:2610.02200</span></figcaption>
+  </figure>
+
+  <h2>五、用在哪（Where）：一套 harness 打四个基准</h2>
+  <p>同一套接口几乎零适配地迁移到三个新环境，证明它是通用视觉 harness 而非 ARC 专用方案：</p>
+  <table>
+    <tr><th>基准</th><th>内容</th><th>VISTA 成绩</th></tr>
+    <tr><td>GameWorld</td><td>34 个浏览器游戏、170 个任务（吃豆人/Mario/2048/Fireboy…）</td><td>超越新手人类基线</td></tr>
+    <tr><td>AI GameStore</td><td>10 个公开浏览器游戏（Aqua Sort/Megaman…）</td><td>超过人类中位数基线</td></tr>
+    <tr><td>BabyVision</td><td>39 道静态视觉追踪题（迷宫 + 连线）</td><td>41.0% → <b>63.2%</b></td></tr>
+  </table>
+  <p>BabyVision 最耐人寻味：<b>静态单图、没有交互历史</b>，仅靠 <code>inspect</code> 放大局部区域就把准确率提升 22 个百分点——"主动检查"本身的独立价值被单独验证了。</p>
+
+  <figure>
+    <img src="assets/fig_envs.png" alt="Figure 11：三个泛化基准总览">
+    <figcaption><b>图 5 ｜ 论文 Figure 11：</b>三个泛化基准（GameWorld / AI GameStore / BabyVision）与环境总览。GameWorld 与 AI GameStore 是交互式，BabyVision 是静态题。<span class="src">来源：arXiv:2610.02200</span></figcaption>
+  </figure>
+
+  <h2>六、思考感悟：这可能是这个领域的"回归本真"</h2>
+  <p>读完 VISTA，一个很强烈的直觉是——<b>它和何恺明团队最近那篇《Back to Basics: Let Denoising Generative Models Denoise》（CVPR 2026）是同一个"回归本真"叙事的两面。</b></p>
+  <div class="quote">
+    <p><b>扩散那边：</b>今天的扩散模型其实并没有在"去噪"——它们预测的是噪声（或带噪量），而不是干净图像。这篇论文主张<b>直接预测干净像素</b>，回归"去噪"这个词的本义。数据天然落在低维流形上，而噪声量不落在上面——预测干净数据才是更本质的目标。</p>
+    <p><b>Agent 这边：</b>主流做法给模型套了层层中间抽象——把画面转成文本网格、再建可执行程序、再用搜索验证。VISTA 把这些全剥掉，<b>让模型直接看画面、直接用自然语言推理、直接回看原始证据</b>，回归"感知世界"的本义。</p>
+  </div>
+  <p>两条线的共同点非常清晰：<b>去掉中间复杂过程，回到直接目标。</b></p>
+  <ul>
+    <li>扩散：预测噪声（中间量）→ <b>直接预测干净像素</b></li>
+    <li>Agent：文本网格 + 程序合成（中间抽象）→ <b>直接视觉感知 + 按需回看原始帧</b></li>
+  </ul>
+  <p>更深一层的启示：<b>模型的基础能力可能被我们严重低估了</b>——缺的不是更强的模型，而是一个简单、正确、把能力释放出来的接口。VISTA 换输入表示（文本→图像）就 +34 分、加记忆与检查再 +24 分，全程没动任何参数。这也解释了为什么它对 100K 小上下文依然稳健：它根本不靠"塞更多历史进上下文"，而是把历史放在外面、需要时再精确取用。</p>
+  <p>附：VISTA 对 3D 渲染同样鲁棒（RHAE 84.12，远超文本基线），说明这套"直接视觉"路线不挑表示形式，进一步支持"回归本真"的判断。</p>
+
+  <h2>七、局限与后续</h2>
+  <div class="card">
+    <p><b>局限（论文自认）：</b>① 模型自身能力仍是成功的决定性因素，harness 只是"解锁"；② <b>数据污染风险</b>——模型发布于基准之后，不排除公开游戏进入训练数据，需要在 ARC-AGI-3 私有集上验证；③ 动作开销不小（3D 下需 20,640 个动作）。</p>
+    <p><b>后续方向：</b>① 计算机使用 / GUI agent 基础设施（无损截图记忆 + 区域检查天然契合浏览器与桌面自动化）；② 具身智能——更接近物理世界的环境；③ 与程序合成<b>互补</b>而非对立（VISTA 做感知与记忆，程序做验证与搜索）；④ 用 harness 生成高质量交互轨迹，训练原生具备"长程视觉记忆"的 agent（把工具能力内化成模型能力）；⑤ 作为"无限上下文"的廉价替代方案。</p>
+  </div>
+
+  <div class="foot">
+    博客由日常口述整理（daily-dictation-organizer）流程生成 ｜ 配图均来自论文 arXiv:2610.02200（CC BY 4.0）｜ 代码仓库 github.com/joshhhhhan/VISTA（MIT License）
+  </div>
+</div>
+</body>
+</html>

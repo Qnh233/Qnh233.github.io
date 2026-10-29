@@ -13,28 +13,15 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/未命名.md",
+                "file": "_posts/VISTA：给多模态模型一双会“回看”的眼睛.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "未命名"
-            }
-          },
-          {
-            "id": "776e19a1100e29a5",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.14.4"
-              },
-              "icon": "lucide-book-up",
-              "title": "版本说明 1.14.4"
+              "title": "VISTA：给多模态模型一双会“回看”的眼睛"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -254,12 +241,13 @@
       "templater-obsidian:Templater": false,
       "terminal:Open terminal": false,
       "realtime-transcription:实时语音转写": false,
-      "gantt-calendar:甘特日历": false,
-      "periodic-notes:Open today": false
+      "gantt-calendar:甘特日历": false
     }
   },
-  "active": "776e19a1100e29a5",
+  "active": "ceee37190ce8fe76",
   "lastOpenFiles": [
+    "_posts/VISTA：给多模态模型一双会“回看”的眼睛.md",
+    "assets/attachments/VISTA视觉驾驭框架介绍博客.html",
     "_posts/未命名.md",
     "_posts/note/day/2026-10-02.md",
     "assets/attachments/今日复盘-思维导图-2026-10-02.html",
@@ -297,14 +285,11 @@
     "assets/attachments/767feb2d585740a2a2f1939241f5b6ba 1.png",
     "assets/attachments/767feb2d585740a2a2f1939241f5b6ba.png",
     "_posts/2026-06-14-实习旅途.md",
-    "_posts/进程-线程-协程.md",
     "_posts/算法",
-    "_posts/未命名思维导图.md",
     "assets/attachments",
     "skills/outliner-note",
     "skills/mermaid-visualizer",
     "skills/excalidraw-diagram",
-    "skills/obsidian-bases",
-    "skills/json-canvas"
+    "skills/obsidian-bases"
   ]
 }
